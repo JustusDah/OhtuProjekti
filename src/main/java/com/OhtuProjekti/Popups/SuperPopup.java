@@ -1,28 +1,44 @@
 package com.OhtuProjekti.Popups;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import static com.OhtuProjekti.Utils.TITLE_TEXT_COLOR;
+import static com.OhtuProjekti.Utils.*;
 
 abstract public class SuperPopup {
+    /**
+     * The popup window
+     */
+    Stage stage;
+
+    /**
+     * The whole popup content
+     */
     BorderPane popupPane;
 
+    /**
+     * Pane in the center
+     */
     StackPane centerPane;
 
-    GridPane bottomButtonRow;
+    /**
+     * Row of buttons in the bottom
+     */
+    HBox bottomRow;
 
 
     public void createPopupSuper(String titleText){
         popupPane = new BorderPane();
-        bottomButtonRow = new GridPane();
+
+        bottomRow = new HBox();
+        bottomRow.setSpacing(10);
+        bottomRow.setPadding(new Insets(10, 10, 10, 10));
+        bottomRow.setAlignment(Pos.CENTER);
+
         centerPane = new StackPane();
         Text labelText = new Text(titleText);
         labelText.setScaleX(3);
@@ -37,7 +53,7 @@ abstract public class SuperPopup {
 
         popupPane.setTop(labelTextPane);
         popupPane.setCenter(centerPane);
-        popupPane.setBottom(bottomButtonRow);
+        popupPane.setBottom(bottomRow);
 
 
 
@@ -46,13 +62,15 @@ abstract public class SuperPopup {
     }
 
     public void showPopup(){
-        Stage stage = new Stage();
-        stage.setScene(new Scene(popupPane, 300, 200));
+        stage = new Stage();
+        stage.setScene(new Scene(popupPane, POPUP_WIDTH, POPUP_HEIGHT));
         stage.show();
 
     }
 
     public void closePopup(){
+        stage.close();
+
 
     }
 

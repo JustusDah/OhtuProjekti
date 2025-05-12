@@ -91,6 +91,7 @@ public class TestScreen extends SuperScreen {
         Button insertMokkiButton = new Button("Insert mokki");
         insertMokkiButton.setOnAction(e -> {
             InsertMokkiPopup insertMokkiPopup = new InsertMokkiPopup();
+            insertMokkiPopup.createPopup();
             insertMokkiPopup.showPopup();
         });
         screen.setBottom(insertMokkiButton);
