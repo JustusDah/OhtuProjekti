@@ -3,8 +3,6 @@ package com.OhtuProjekti;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-//iajgaogoia
-
 /**
  * Startpoint of the application.
  */
