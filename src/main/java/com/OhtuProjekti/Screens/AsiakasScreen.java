@@ -16,7 +16,7 @@ import static com.OhtuProjekti.Utils.*;
 public class AsiakasScreen extends SuperScreen {
 
 
-    /** Constructor, sets GameScreen.sceneManager
+    /** Constructor, sets this.sceneManager
      * @param sceneManager The common project SceneManager
      */
     public AsiakasScreen(SceneManager sceneManager) {
