@@ -3,7 +3,6 @@ package com.OhtuProjekti.Popups;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,15 +28,16 @@ abstract public class SuperPopup {
     /**
      * Row of buttons in the bottom
      */
-    HBox bottomButtonRow;
+    HBox bottomRow;
 
 
     public void createPopupSuper(String titleText){
         popupPane = new BorderPane();
 
-        bottomButtonRow = new HBox();
-        bottomButtonRow.setSpacing(10);
-        bottomButtonRow.setPadding(new Insets(10, 10, 10, 10));
+        bottomRow = new HBox();
+        bottomRow.setSpacing(10);
+        bottomRow.setPadding(new Insets(10, 10, 10, 10));
+        bottomRow.setAlignment(Pos.CENTER);
 
         centerPane = new StackPane();
         Text labelText = new Text(titleText);
@@ -53,7 +53,7 @@ abstract public class SuperPopup {
 
         popupPane.setTop(labelTextPane);
         popupPane.setCenter(centerPane);
-        popupPane.setBottom(bottomButtonRow);
+        popupPane.setBottom(bottomRow);
 
 
 

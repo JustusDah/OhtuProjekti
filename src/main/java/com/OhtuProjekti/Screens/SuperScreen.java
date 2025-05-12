@@ -24,8 +24,16 @@ abstract public class SuperScreen {
      */
     public BorderPane screen;
 
+    /**
+     * VBox at the left of the screen
+     */
     public VBox leftPane;
+
+    /**
+     * HBox at the bottom of the screen, should contain buttons
+     */
     public HBox bottomPane;
+    
     public VBox rightPane;
 
 

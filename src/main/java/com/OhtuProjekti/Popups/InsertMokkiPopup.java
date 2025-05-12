@@ -18,7 +18,7 @@ public class InsertMokkiPopup extends SuperPopup{
         TextField equipmentField = new TextField();
         TextField priceField = new TextField();
         TextField capacityField = new TextField();
-        Button insertButton = new Button("Tallenna mökki");
+
 
         grid.add(new Label("Mökki ID:"), 0, 0);
         grid.add(idField, 1, 0);
@@ -32,8 +32,12 @@ public class InsertMokkiPopup extends SuperPopup{
         grid.add(priceField, 1, 4);
         grid.add(new Label("Kapasiteetti:"), 0, 5);
         grid.add(capacityField, 1, 5);
-        grid.add(insertButton, 1, 6);
 
+        this.centerPane.getChildren().add(grid);
+
+
+
+        Button insertButton = new Button("Tallenna mökki");
         insertButton.setOnAction(e -> {
             try {
                 int id = Integer.parseInt(idField.getText());
@@ -49,7 +53,8 @@ public class InsertMokkiPopup extends SuperPopup{
             }
             this.closePopup();
         });
-        this.centerPane.getChildren().add(grid);
+
+        bottomRow.getChildren().add(insertButton);
 
 
     }
