@@ -3,6 +3,8 @@ package com.OhtuProjekti;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+//sdfasd
+
 /**
  * Startpoint of the application.
  */

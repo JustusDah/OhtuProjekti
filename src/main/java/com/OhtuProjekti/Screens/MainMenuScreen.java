@@ -1,15 +1,9 @@
 package com.OhtuProjekti.Screens;
 import com.OhtuProjekti.SceneManager;
-import com.OhtuProjekti.Utils;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-
-import static com.OhtuProjekti.Utils.*;
 
 
 /**
@@ -37,7 +31,7 @@ public class MainMenuScreen extends SuperScreen {
      * Initializes the app and creates the Pane layout for drawing the main menu
      */
     public void createScreen(){
-        super.createScreenSuper("Menu");
+        super.createScreenSuperNoBack("Menu");
 
         VBox menuBox = new VBox();
         menuBox.setAlignment(Pos.CENTER);

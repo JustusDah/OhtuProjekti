@@ -23,6 +23,9 @@ public class Utils {
      */
     public static final double SCREEN_HEIGHT = 800;
 
+    public static final double POPUP_WIDTH = 600;
+    public static final double POPUP_HEIGHT = 500;
+
     public static final Color TITLE_TEXT_COLOR = Color.DEEPPINK;
 
 }
