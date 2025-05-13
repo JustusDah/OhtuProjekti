@@ -29,7 +29,7 @@ public class InsertLaskuPopup extends SuperPopup{
 
 
 
-        Button insertButton = new Button("Tallenna mökki");
+        Button insertButton = new Button("Tallenna lasku");
         insertButton.setOnAction(e -> {
             try {
                 double summa = Double.parseDouble(idField.getText());

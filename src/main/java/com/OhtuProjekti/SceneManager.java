@@ -72,6 +72,12 @@ public class SceneManager {
         setScene(asiakasScreen.getScreen());
     }
 
+    public void showLaskuScreen(){
+        LaskuScreen laskuScreen = new LaskuScreen(this);
+        laskuScreen.createScreen();
+        setScene(laskuScreen.getScreen());
+    }
+
     public void showTestScreen() {
         TestScreen testScreen = new TestScreen(this);
         testScreen.createScreen();
