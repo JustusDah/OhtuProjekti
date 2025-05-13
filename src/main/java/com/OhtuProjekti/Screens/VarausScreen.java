@@ -58,7 +58,7 @@ public class VarausScreen extends SuperScreen {
         screen.setCenter(contentBox);
 
 
-        Button insertVarausButton = new Button("Lisää mökki");
+        Button insertVarausButton = new Button("Lisää varaus");
         insertVarausButton.setOnAction(e -> {
             InsertVarausPopup insertVarausPopup = new InsertVarausPopup();
             insertVarausPopup.createPopup();
