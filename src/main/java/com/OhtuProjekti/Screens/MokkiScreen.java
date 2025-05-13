@@ -30,7 +30,7 @@ public class MokkiScreen extends SuperScreen {
         VBox contentBox = new VBox(10);
         contentBox.setPadding(new Insets(20));
 
-        Text title = new Text("Valitse mökki nähdäksesi tai muokataksesi tietoja :");
+        Text title = new Text("Valitse mökki nähdäksesi tai muokataksesi tietoja:");
         contentBox.getChildren().add(title);
 
         VBox buttonBox = new VBox(5);

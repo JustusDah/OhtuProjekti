@@ -33,7 +33,7 @@ public class VarausScreen extends SuperScreen {
         VBox contentBox = new VBox(10);
         contentBox.setPadding(new Insets(20));
 
-        Text title = new Text("Valitse varaus nähdäksesi tiedot:");
+        Text title = new Text("Valitse varaus nähdäksesi tai muokataksesi tietoja:");
         contentBox.getChildren().add(title);
 
         VBox buttonBox = new VBox(5);
