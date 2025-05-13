@@ -31,6 +31,8 @@ public class SQL {
                         "VarausID INTEGER PRIMARY KEY," +
                         "AsiakasID INTEGER," +
                         "MokkiID INTEGER," +
+                        "Alkupaiva TEXT," +
+                        "Loppupaiva TEXT," +
                         "FOREIGN KEY (AsiakasID) REFERENCES Asiakas(AsiakasID)," +
                         "FOREIGN KEY (MokkiID) REFERENCES Mokki(MokkiID)" +
                         ");",

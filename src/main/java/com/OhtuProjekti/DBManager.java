@@ -161,7 +161,9 @@ public class DBManager {
                 list.add(new Varaus(
                         rs.getInt("VarausID"),
                         rs.getInt("AsiakasID"),
-                        rs.getInt("MokkiID")
+                        rs.getInt("MokkiID"),
+                        rs.getDate("Alkupaiva"),
+                        rs.getDate("Loppupaiva")
                 ));
             }
         } catch (SQLException e) {
