@@ -19,7 +19,7 @@ public class LaskuPopup extends SuperPopup{
         TextField sumField = new TextField(String.valueOf(laskuOriginal.summa));
         TextField erapaivaField = new TextField(laskuOriginal.erapaiva);
         TextField varausIDField  = new TextField(String.valueOf(laskuOriginal.varausID));
-        TextField maksettuField = new TextField( String.valueOf(laskuOriginal.maksettu));
+        TextField maksettuField = new TextField(String.valueOf(laskuOriginal.maksettu));
 
 
         grid.add(new Label("Summa:"), 0, 1);
