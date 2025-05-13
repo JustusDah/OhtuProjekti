@@ -15,7 +15,7 @@ public class SQL {
                         "Nimi TEXT," +
                         "Osoite TEXT," +
                         "Puhelin TEXT," +
-                        "Sahkoposti TEXT," +
+                        "Sahkoposti TEXT" +
                         ");",
 
                 "CREATE TABLE Mokki (" +
@@ -43,7 +43,7 @@ public class SQL {
                         "Summa REAL," +
                         "Erapaiva TEXT," +
                         "VarausID INTEGER," +
-                        "Maksettu INTEGER" +
+                        "Maksettu INTEGER," +
                         "FOREIGN KEY (VarausID) REFERENCES Varaus(VarausID)" +
                         ");"
         };
