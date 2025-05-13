@@ -38,8 +38,10 @@ abstract public class SuperPopup {
     HBox bottomRow;
 
 
+
     public void createPopupSuper(String titleText){
         popupPane = new BorderPane();
+
 
         bottomRow = new HBox();
         bottomRow.setSpacing(10);
@@ -47,6 +49,8 @@ abstract public class SuperPopup {
         bottomRow.setAlignment(Pos.CENTER);
 
         centerPane = new StackPane();
+        centerPane.setAlignment(Pos.CENTER);
+        centerPane.setPadding(new Insets(40, 40, 40, 40));
         Text labelText = new Text(titleText);
         labelText.setScaleX(3);
         labelText.setScaleY(3);
@@ -58,10 +62,12 @@ abstract public class SuperPopup {
         labelTextPane.setAlignment(Pos.CENTER);
         labelTextPane.getChildren().add(labelText);
 
+
+
+
         popupPane.setTop(labelTextPane);
         popupPane.setCenter(centerPane);
         popupPane.setBottom(bottomRow);
-
 
 
 

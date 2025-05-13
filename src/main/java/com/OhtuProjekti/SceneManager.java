@@ -60,6 +60,12 @@ public class SceneManager {
 
     }
 
+    public void showVarausScreen() {
+        VarausScreen varausScreen = new VarausScreen(this);
+        varausScreen.createScreen();
+        setScene(varausScreen.getScreen());
+    }
+
     public void showAsiakasScreen(){
         AsiakasScreen asiakasScreen = new AsiakasScreen(this);
         asiakasScreen.createScreen();

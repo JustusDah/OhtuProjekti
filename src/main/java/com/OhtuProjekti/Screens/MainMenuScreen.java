@@ -45,7 +45,7 @@ public class MainMenuScreen extends SuperScreen {
 
         Button varauksetButton = new Button("Varaukset");
         varauksetButton.setOnAction(e -> {
-            //sceneManager.showVarausScreen();
+            sceneManager.showVarausScreen();
         });
 
         Button testButton = new Button("Testi");
