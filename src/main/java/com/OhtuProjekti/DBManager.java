@@ -78,7 +78,7 @@ public class DBManager {
                         rs.getInt("AsiakasID"),
                         rs.getString("Nimi"),
                         rs.getString("Osoite"),
-                        rs.getString("Puhnro"),
+                        rs.getString("Puhelin"),
                         rs.getString("Sahkoposti")
                 ));
             }
