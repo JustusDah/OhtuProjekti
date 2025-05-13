@@ -16,4 +16,12 @@ public class Mokki {
         this.hintaPerYo = hintaPerYo;
         this.kapasiteetti = kapasiteetti;
     }
+
+    public Mokki(String nimi, String osoite, String varustelu, double hintaPerYo, int kapasiteetti) {
+        this.nimi = nimi;
+        this.osoite = osoite;
+        this.varustelu = varustelu;
+        this.hintaPerYo = hintaPerYo;
+        this.kapasiteetti = kapasiteetti;
+    }
 }

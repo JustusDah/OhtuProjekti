@@ -48,16 +48,15 @@ public class DBManager {
     }
 
     public static void  insertAsiakas(Asiakas a){
-        String sql = "INSERT INTO Asiakas (AsiakasID, Nimi, Osoite, Puhnro, Sahkoposti) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Asiakas (Nimi, Osoite, Puhnro, Sahkoposti) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, a.asiakasID);
-            pstmt.setString(2, a.nimi);
-            pstmt.setString(3, a.osoite);
-            pstmt.setString(4, a.puhnro);
-            pstmt.setString(5, a.sahkoposti);
+            pstmt.setString(1, a.nimi);
+            pstmt.setString(2, a.osoite);
+            pstmt.setString(3, a.puhnro);
+            pstmt.setString(4, a.sahkoposti);
 
             pstmt.executeUpdate();
             System.out.println("Asiakas inserted succesfully.");
@@ -90,17 +89,17 @@ public class DBManager {
     }
 
     public static void insertMokki(Mokki m) {
-        String sql = "INSERT INTO Mokki (MokkiID, Nimi, Osoite, Varustelu, HintaPerYo, Kapasiteetti) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Mokki ( Nimi, Osoite, Varustelu, HintaPerYo, Kapasiteetti) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, m.mokkiID);
-            pstmt.setString(2, m.nimi);
-            pstmt.setString(3, m.osoite);
-            pstmt.setString(4, m.varustelu);
-            pstmt.setDouble(5, m.hintaPerYo);
-            pstmt.setInt(6, m.kapasiteetti);
+            //pstmt.setInt(1, m.mokkiID);
+            pstmt.setString(1, m.nimi);
+            pstmt.setString(2, m.osoite);
+            pstmt.setString(3, m.varustelu);
+            pstmt.setDouble(4, m.hintaPerYo);
+            pstmt.setInt(5, m.kapasiteetti);
 
             pstmt.executeUpdate();
             System.out.println("Mökki inserted successfully.");

@@ -5,6 +5,7 @@ public class Varaus {
     public int asiakasID;
     public int mokkiID;
 
+
     public Varaus(int varausID, int asiakasID, int mokkiID){
         this.varausID = varausID;
         this.asiakasID = asiakasID;

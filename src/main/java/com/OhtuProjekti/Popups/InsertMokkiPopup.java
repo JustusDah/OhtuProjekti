@@ -12,16 +12,13 @@ public class InsertMokkiPopup extends SuperPopup{
         super.createPopupSuper("Lisää mökki");
 
         GridPane grid = new GridPane();
-        TextField idField = new TextField();
+        //TextField idField = new TextField();
         TextField nameField = new TextField();
         TextField addressField = new TextField();
         TextField equipmentField = new TextField();
         TextField priceField = new TextField();
         TextField capacityField = new TextField();
 
-
-        grid.add(new Label("Mökki ID:"), 0, 0);
-        grid.add(idField, 1, 0);
         grid.add(new Label("Nimi:"), 0, 1);
         grid.add(nameField, 1, 1);
         grid.add(new Label("Osoite:"), 0, 2);
@@ -40,14 +37,13 @@ public class InsertMokkiPopup extends SuperPopup{
         Button insertButton = new Button("Tallenna mökki");
         insertButton.setOnAction(e -> {
             try {
-                int id = Integer.parseInt(idField.getText());
                 String nimi = nameField.getText();
                 String osoite = addressField.getText();
                 String varustelu = equipmentField.getText();
                 double hinta = Double.parseDouble(priceField.getText());
                 int kapasiteetti = Integer.parseInt(capacityField.getText());
 
-                Mokki mokki = new Mokki(id, nimi, osoite, varustelu, hinta, kapasiteetti);
+                Mokki mokki = new Mokki( nimi, osoite, varustelu, hinta, kapasiteetti);
                 DBManager.insertMokki(mokki);
             } catch (Exception _) {
             }
