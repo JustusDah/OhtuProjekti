@@ -232,4 +232,62 @@ public class DBManager {
             System.out.println("Error updating Mökki: " + e.getMessage());
         }
     }
+
+
+    public static void updateAsiakas(Asiakas a) {
+        String sql = "UPDATE Asiakas SET Nimi = ?, Osoite = ?, Sahkoposti = ?, Puhnro = ? WHERE AsiakasID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, a.nimi);
+            pstmt.setString(2, a.osoite);
+            pstmt.setString(3, a.sahkoposti);
+            pstmt.setString(4, a.puhnro);
+            pstmt.setInt(5, a.asiakasID);
+
+            pstmt.executeUpdate();
+            System.out.println("Asiakas updated successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error updating Asiakas: " + e.getMessage());
+        }
+    }
+
+    public static void updateVaraus(Varaus v) {
+        String sql = "UPDATE Varaus SET AsiakasID = ?, MokkiID = ? WHERE VarausID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, v.asiakasID);
+            pstmt.setInt(2, v.mokkiID);
+            pstmt.setInt(3, v.varausID);
+
+            pstmt.executeUpdate();
+            System.out.println("Varaus updated successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error updating Varaus: " + e.getMessage());
+        }
+    }
+
+    public static void updateLasku(Lasku l) {
+        String sql = "UPDATE Lasku SET Summa = ?, Erapaiva = ?, VarausID = ?, Maksettu = ? WHERE LaskuID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDouble(1, l.summa);
+            pstmt.setString(2, l.erapaiva);
+            pstmt.setInt(3, l.varausID);
+            pstmt.setInt(4, l.maksettu);
+            pstmt.setInt(5, l.laskuID);
+
+            pstmt.executeUpdate();
+            System.out.println("Lasku updated successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error updating Lasku: " + e.getMessage());
+        }
+    }
+
+
 }
