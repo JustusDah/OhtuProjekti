@@ -36,9 +36,6 @@ public class MokkiScreen extends SuperScreen {
         VBox buttonBox = new VBox(5);
         buttonBox.setFillWidth(true);
 
-        Text detailsText = new Text();
-        detailsText.setWrappingWidth(400);
-
         List<Mokki> mokit = DBManager.getAllMokit();
         for (Mokki mokki : mokit) {
             Button button = new Button(mokki.nimi);
@@ -49,19 +46,12 @@ public class MokkiScreen extends SuperScreen {
                 MokkiPopup mokkiPopup = new MokkiPopup();
                 mokkiPopup.createPopup(mokki);
                 mokkiPopup.showPopup();
-                String details = "ID: " + mokki.mokkiID + "\n" +
-                        "Nimi: " + mokki.nimi + "\n" +
-                        "Osoite: " + mokki.osoite + "\n" +
-                        "Varustelu: " + mokki.varustelu + "\n" +
-                        "Hinta per yö: " + mokki.hintaPerYo + " €\n" +
-                        "Kapasiteetti: " + mokki.kapasiteetti + " hlö";
-                detailsText.setText(details);
             });
 
             buttonBox.getChildren().add(button);
         }
 
-        contentBox.getChildren().addAll(buttonBox, detailsText);
+        contentBox.getChildren().add(buttonBox);
 
 
         screen.setCenter(contentBox);

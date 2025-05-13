@@ -254,14 +254,16 @@ public class DBManager {
     }
 
     public static void updateVaraus(Varaus v) {
-        String sql = "UPDATE Varaus SET AsiakasID = ?, MokkiID = ? WHERE VarausID = ?";
+        String sql = "UPDATE Varaus SET AsiakasID = ?, MokkiID = ?, Alkupaiva = ?, Loppupaiva = ?, WHERE VarausID = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, v.asiakasID);
             pstmt.setInt(2, v.mokkiID);
-            pstmt.setInt(3, v.varausID);
+            pstmt.setString(3, v.alkupaiva.toString());
+            pstmt.setString(4, v.loppupaiva.toString());
+            pstmt.setInt(5, v.varausID);
 
             pstmt.executeUpdate();
             System.out.println("Varaus updated successfully.");
