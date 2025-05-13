@@ -4,6 +4,7 @@ import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
 import com.OhtuProjekti.Popups.InsertMokkiPopup;
+import com.OhtuProjekti.Popups.InsertVarausPopup;
 import com.OhtuProjekti.Popups.MokkiPopup;
 import com.OhtuProjekti.SceneManager;
 import javafx.geometry.Insets;
@@ -45,9 +46,9 @@ public class VarausScreen extends SuperScreen {
             button.setPrefWidth(200);
 
             button.setOnAction(e -> {
-                VarausPopup varausPopup = new VarausPopup();
-                varausPopup.createPopup(varaus);
-                varausPopup.showPopup();
+                //VarausPopup varausPopup = new VarausPopup();
+                //varausPopup.createPopup(varaus);
+                //varausPopup.showPopup();
             });
 
             buttonBox.getChildren().add(button);

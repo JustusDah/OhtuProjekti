@@ -25,9 +25,9 @@ public class InsertVarausPopup extends SuperPopup{
         grid.add(asiakasIdField, 1, 1);
         grid.add(new Label("MokkiId:"), 0, 2);
         grid.add(mokkiIdField, 1, 2);
-        grid.add(new Label("Alkupaiva:"), 0, 3);
+        grid.add(new Label("Alkupaiva (yyyy-MM-dd):"), 0, 3);
         grid.add(alkupaivaField, 1, 3);
-        grid.add(new Label("Loppupaiva:"), 0, 4);
+        grid.add(new Label("Loppupaiva (yyyy-MM-dd):"), 0, 4);
         grid.add(loppupaivaField, 1, 4);
 
         this.centerPane.getChildren().add(grid);
