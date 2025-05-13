@@ -46,7 +46,7 @@ public class AsiakasScreen extends SuperScreen {
             button.setPrefWidth(200);
 
             button.setOnAction(e -> {
-                AsiakasPopupp asiakasPopup = new Asiakaspopup();
+                AsiakasPopup asiakasPopup = new AsiakasPopup();
                 asiakasPopup.createPopup(asiakas);
                 asiakasPopup.showPopup();
                 String details = "ID: " + asiakas.asiakasID + "\n" +
