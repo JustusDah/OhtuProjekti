@@ -1,16 +1,17 @@
 package com.OhtuProjekti.Classes;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Varaus {
     public int varausID;
     public int asiakasID;
     public int mokkiID;
-    public Date alkupaiva;
-    public Date loppupaiva;
+    public String alkupaiva;
+    public String loppupaiva;
 
 
-    public Varaus(int varausID, int asiakasID, int mokkiID, Date alkupaiva, Date loppupaiva) {
+    public Varaus(int varausID, int asiakasID, int mokkiID, String alkupaiva, String loppupaiva) {
         this.varausID = varausID;
         this.asiakasID = asiakasID;
         this.mokkiID = mokkiID;
@@ -18,7 +19,7 @@ public class Varaus {
         this.loppupaiva = loppupaiva;
     }
 
-    public Varaus(int asiakasID, int mokkiID, Date alkupaiva, Date loppupaiva) {
+    public Varaus(int asiakasID, int mokkiID, String alkupaiva, String loppupaiva) {
         this.asiakasID = asiakasID;
         this.mokkiID = mokkiID;
         this.alkupaiva = alkupaiva;

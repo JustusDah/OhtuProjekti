@@ -165,8 +165,8 @@ public class DBManager {
                         rs.getInt("VarausID"),
                         rs.getInt("AsiakasID"),
                         rs.getInt("MokkiID"),
-                        rs.getDate("Alkupaiva"),
-                        rs.getDate("Loppupaiva")
+                        rs.getString("Alkupaiva"),
+                        rs.getString("Loppupaiva")
                 ));
             }
         } catch (SQLException e) {
@@ -258,7 +258,7 @@ public class DBManager {
     }
 
     public static void updateVaraus(Varaus v) {
-        String sql = "UPDATE Varaus SET AsiakasID = ?, MokkiID = ?, Alkupaiva = ?, Loppupaiva = ?, WHERE VarausID = ?";
+        String sql = "UPDATE Varaus SET AsiakasID = ?, MokkiID = ?, Alkupaiva = ?, Loppupaiva = ? WHERE VarausID = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

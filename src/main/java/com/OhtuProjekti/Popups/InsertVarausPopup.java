@@ -42,7 +42,7 @@ public class InsertVarausPopup extends SuperPopup{
                 String alkupaiva = alkupaivaField.getText();
                 String loppupaiva = loppupaivaField.getText();
 
-                Varaus varaus = new Varaus( asiakasId, mokkiId, Date.valueOf(alkupaiva), Date.valueOf(loppupaiva));
+                Varaus varaus = new Varaus( asiakasId, mokkiId, alkupaiva, loppupaiva);
                 DBManager.insertVaraus(varaus);
             } catch (Exception _) {
             }

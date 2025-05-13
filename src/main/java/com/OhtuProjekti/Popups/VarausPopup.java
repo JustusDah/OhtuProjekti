@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class VarausPopup extends SuperPopup{
     private Varaus varausOriginal;
@@ -48,7 +49,7 @@ public class VarausPopup extends SuperPopup{
                 String alkupaiva = alkupaivaField.getText();
                 String loppupaiva = loppupaivaField.getText();
 
-                Varaus varaus = new Varaus(varausOriginal.varausID, asiakasID, mokkiID, Date.valueOf(alkupaiva), Date.valueOf(loppupaiva));
+                Varaus varaus = new Varaus(varausOriginal.varausID, asiakasID, mokkiID, alkupaiva, loppupaiva);
                 DBManager.updateVaraus(varaus);
             } catch (Exception _) {
             }
