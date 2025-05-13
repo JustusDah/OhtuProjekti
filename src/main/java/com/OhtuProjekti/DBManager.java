@@ -48,7 +48,7 @@ public class DBManager {
     }
 
     public static void  insertAsiakas(Asiakas a){
-        String sql = "INSERT INTO Asiakas (Nimi, Osoite, Puhnro, Sahkoposti) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Asiakas (Nimi, Osoite, Puhelin, Sahkoposti) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
