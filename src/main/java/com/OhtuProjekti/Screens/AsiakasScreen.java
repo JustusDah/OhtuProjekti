@@ -49,12 +49,6 @@ public class AsiakasScreen extends SuperScreen {
                 AsiakasPopup asiakasPopup = new AsiakasPopup();
                 asiakasPopup.createPopup(asiakas);
                 asiakasPopup.showPopup();
-                String details = "ID: " + asiakas.asiakasID + "\n" +
-                        "Nimi: " + asiakasPopup.nimki + "\n" +
-                        "Osoite: " + asiakasPopup.osoite + "\n" +
-                        "Sähköposti: " + asiakasPopup.sahkoposti + "\n" +
-                        "Puhelinnumero: " + asiakasPopup.puhnro + "\n";
-                detailsText.setText(details);
             });
 
             buttonBox.getChildren().add(button);
