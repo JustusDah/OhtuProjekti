@@ -14,8 +14,8 @@ public class SQL {
                         "AsiakasID INTEGER PRIMARY KEY," +
                         "Nimi TEXT," +
                         "Osoite TEXT," +
+                        "Puhelin TEXT," +
                         "Sahkoposti TEXT," +
-                        "Puhnro TEXT" +
                         ");",
 
                 "CREATE TABLE Mokki (" +
@@ -23,8 +23,8 @@ public class SQL {
                         "Nimi TEXT," +
                         "Osoite TEXT," +
                         "Varustelu TEXT," +
-                        "HintaPerYo REAL" +
-                        "Kapasiteetti INTEGER," +
+                        "HintaPerYo REAL," +
+                        "Kapasiteetti INTEGER" +
                         ");",
 
                 "CREATE TABLE Varaus (" +
