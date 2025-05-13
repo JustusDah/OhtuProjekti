@@ -9,11 +9,18 @@ import javafx.stage.Stage;
 
 import static com.OhtuProjekti.Utils.*;
 
+/**
+ * Add content to this
+ * StackPane centerPane
+ *
+ * and buttons to this
+ * HBox bottomRow
+ * */
 abstract public class SuperPopup {
     /**
      * The popup window
      */
-    Stage stage;
+    private Stage stage;
 
     /**
      * The whole popup content
