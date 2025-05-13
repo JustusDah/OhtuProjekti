@@ -78,10 +78,5 @@ public class SceneManager {
         setScene(laskuScreen.getScreen());
     }
 
-    public void showTestScreen() {
-        TestScreen testScreen = new TestScreen(this);
-        testScreen.createScreen();
-        setScene(testScreen.getScreen());
-    }
 
 }

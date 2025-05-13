@@ -21,9 +21,9 @@ public class InsertLaskuPopup extends SuperPopup{
         grid.add(erapaivaField, 1, 1);
         grid.add(new Label("Eräpäivä:"), 0, 2);
         grid.add(varausIdField, 1, 2);
-        grid.add(new Label("varausID:"), 0, 3);
+        grid.add(new Label("VarausID:"), 0, 3);
         grid.add(maksettuField, 1, 3);
-        grid.add(new Label("maksettu:"), 0, 4);
+        grid.add(new Label("Maksettu:"), 0, 4);
 
         this.centerPane.getChildren().add(grid);
 

@@ -50,6 +50,7 @@ public class DBManager {
     public static void  insertAsiakas(Asiakas a){
         String sql = "INSERT INTO Asiakas (Nimi, Osoite, Puhelin, Sahkoposti) VALUES (?, ?, ?, ?)";
 
+        System.out.println("Inserting Asiakas");
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -91,6 +92,7 @@ public class DBManager {
     public static void insertMokki(Mokki m) {
         String sql = "INSERT INTO Mokki ( Nimi, Osoite, Varustelu, HintaPerYo, Kapasiteetti) VALUES (?, ?, ?, ?, ?)";
 
+        System.out.println("Inserting Mokki");
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -135,6 +137,7 @@ public class DBManager {
     public static void insertVaraus(Varaus v) {
         String sql = "INSERT INTO Varaus (VarausID, AsiakasID, MokkiID) VALUES (?, ?, ?)";
 
+        System.out.println("Inserting Varaus");
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -175,6 +178,7 @@ public class DBManager {
     public static void insertLasku(Lasku l) {
         String sql = "INSERT INTO Lasku (Summa, Erapaiva, VarausID, Maksettu) VALUES (?, ?, ?, ?)";
 
+        System.out.println("Inserting Lasku");
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
