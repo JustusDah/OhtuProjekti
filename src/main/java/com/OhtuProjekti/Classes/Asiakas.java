@@ -14,4 +14,11 @@ public class Asiakas {
         this.puhnro = puhnro;
         this.sahkoposti = sahkoposti;
     }
+
+    public Asiakas(String nimi, String osoite, String puhnro, String sahkoposti) {
+        this.nimi = nimi;
+        this.osoite = osoite;
+        this.puhnro = puhnro;
+        this.sahkoposti = sahkoposti;
+    }
 }
