@@ -1,7 +1,7 @@
 package com.OhtuProjekti.Classes;
 
 public class Lasku {
-    public int laskuID;
+    public int laskuID = 0;
     public double summa;
     public String erapaiva;
     public int varausID;
@@ -14,4 +14,12 @@ public class Lasku {
         this.varausID = varausID;
         this.maksettu = maksettu;
     }
+
+    public Lasku(double summa, String erapaiva, int varausID, int maksettu){
+        this.summa = summa;
+        this.erapaiva = erapaiva;
+        this.varausID = varausID;
+        this.maksettu = maksettu;
+    }
+
 }

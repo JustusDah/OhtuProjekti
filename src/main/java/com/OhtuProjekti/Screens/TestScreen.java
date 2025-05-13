@@ -2,6 +2,7 @@ package com.OhtuProjekti.Screens;
 
 import com.OhtuProjekti.DBManager;
 import com.OhtuProjekti.Classes.Mokki;
+import com.OhtuProjekti.Popups.InsertLaskuPopup;
 import com.OhtuProjekti.Popups.InsertMokkiPopup;
 import com.OhtuProjekti.SceneManager;
 import com.OhtuProjekti.Utils;
@@ -95,6 +96,16 @@ public class TestScreen extends SuperScreen {
             insertMokkiPopup.showPopup();
         });
         screen.setBottom(insertMokkiButton);
+
+        Button insertLaskuButton = new Button("Lisää lasku");
+        insertLaskuButton.setOnAction(e -> {
+            InsertLaskuPopup insertLaskuPopup = new InsertLaskuPopup();
+            insertLaskuPopup.createPopup();
+            insertLaskuPopup.showPopup();
+        });
+
+        screen.setBottom(insertLaskuButton);
+
 
     }
 

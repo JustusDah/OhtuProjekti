@@ -3,6 +3,7 @@ package com.OhtuProjekti.Screens;
 import com.OhtuProjekti.DBManager;
 import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Popups.InsertMokkiPopup;
+import com.OhtuProjekti.Popups.MokkiPopup;
 import com.OhtuProjekti.SceneManager;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -48,6 +49,9 @@ public class MokkiScreen extends SuperScreen {
             button.setPrefWidth(200);
 
             button.setOnAction(e -> {
+                MokkiPopup mokkiPopup = new MokkiPopup();
+                mokkiPopup.createPopup(mokki);
+                mokkiPopup.showPopup();
                 String details = "ID: " + mokki.mokkiID + "\n" +
                         "Nimi: " + mokki.nimi + "\n" +
                         "Osoite: " + mokki.osoite + "\n" +

@@ -172,16 +172,15 @@ public class DBManager {
     }
 
     public static void insertLasku(Lasku l) {
-        String sql = "INSERT INTO Lasku (LaskuID, Summa, Erapaiva, VarausID, Maksettu) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Lasku (Summa, Erapaiva, VarausID, Maksettu) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, l.laskuID);
-            pstmt.setDouble(2, l.summa);
-            pstmt.setString(3, l.erapaiva);
-            pstmt.setInt(4, l.varausID);
-            pstmt.setInt(5, l.maksettu);
+            pstmt.setDouble(1, l.summa);
+            pstmt.setString(2, l.erapaiva);
+            pstmt.setInt(3, l.varausID);
+            pstmt.setInt(4, l.maksettu);
 
             pstmt.executeUpdate();
             System.out.println("Lasku inserted successfully.");
@@ -211,5 +210,25 @@ public class DBManager {
             System.out.println("Error fetching Laskut: " + e.getMessage());
         }
         return list;
+    }
+
+    public static void updateMokki(Mokki m) {
+        String sql = "UPDATE Mokki SET Nimi = ?, Osoite = ?, Varustelu = ?, HintaPerYo = ?, Kapasiteetti = ? WHERE MokkiID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, m.nimi);
+            pstmt.setString(2, m.osoite);
+            pstmt.setString(3, m.varustelu);
+            pstmt.setDouble(4, m.hintaPerYo);
+            pstmt.setInt(5, m.kapasiteetti);
+            pstmt.setInt(6, m.mokkiID);
+
+            pstmt.executeUpdate();
+            System.out.println("Mökki updated successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error updating Mökki: " + e.getMessage());
+        }
     }
 }
