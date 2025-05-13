@@ -26,6 +26,7 @@ public class Varaus {
     }
 
     public int varauksenKesto(){
+        return 0;
 
     }
 
