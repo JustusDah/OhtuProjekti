@@ -58,17 +58,12 @@ public class MainMenuScreen extends SuperScreen {
             sceneManager.showLaskuScreen();
         });
 
-        Button testButton = new Button("Testi");
-        testButton.setOnAction(e -> {
-            sceneManager.showTestScreen();
-        });
-
         Button exitButton = new Button("Exit");
         exitButton.setOnAction(e -> {
             System.exit(0);
         });
 
-        menuBox.getChildren().addAll(mokkiButton, varauksetButton, asiakasButton, laskuButton, testButton, exitButton);
+        menuBox.getChildren().addAll(mokkiButton, varauksetButton, asiakasButton, laskuButton, exitButton);
         screen.setCenter(menuBox);
 
     }
