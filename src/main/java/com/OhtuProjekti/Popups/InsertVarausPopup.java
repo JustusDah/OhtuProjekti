@@ -12,7 +12,7 @@ import java.sql.Date;
 
 public class InsertVarausPopup extends SuperPopup{
     public void createPopup(){
-        super.createPopupSuper("Lisää mökki");
+        super.createPopupSuper("Lisää varaus");
 
         GridPane grid = new GridPane();
         //TextField idField = new TextField();
@@ -34,11 +34,11 @@ public class InsertVarausPopup extends SuperPopup{
 
 
 
-        Button insertButton = new Button("Tallenna mökki");
+        Button insertButton = new Button("Tallenna varaus");
         insertButton.setOnAction(e -> {
             try {
-                int asiakasId = Integer.valueOf(asiakasIdField.getText());
-                int mokkiId = Integer.valueOf(mokkiIdField.getText());
+                int asiakasId = Integer.parseInt(asiakasIdField.getText());
+                int mokkiId = Integer.parseInt(mokkiIdField.getText());
                 String alkupaiva = alkupaivaField.getText();
                 String loppupaiva = loppupaivaField.getText();
 
