@@ -13,7 +13,7 @@ public class VarausPopup extends SuperPopup{
     public void createPopup(Varaus varausInput){
         varausOriginal = varausInput;
 
-        super.createPopupSuper("Muokkaa mökkiä");
+        super.createPopupSuper("Muokkaa varausta");
 
         GridPane grid = new GridPane();
         TextField idField = new TextField(String.valueOf(varausOriginal.varausID));

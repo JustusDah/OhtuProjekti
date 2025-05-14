@@ -7,7 +7,6 @@ import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.sqlite.core.DB;
 
 import java.sql.*;
 import java.util.ArrayList;
