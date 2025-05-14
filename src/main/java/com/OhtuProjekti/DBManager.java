@@ -5,12 +5,20 @@ import com.OhtuProjekti.Classes.Asiakas;
 import com.OhtuProjekti.Classes.Lasku;
 import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.sqlite.core.DB;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
+    public static ObservableList<Asiakas> asiakkaat = FXCollections.observableArrayList();
+    public static ObservableList<Lasku> laskut = FXCollections.observableArrayList();
+    public static ObservableList<Mokki> mokkis = FXCollections.observableArrayList();
+    public static ObservableList<Varaus> varaukset = FXCollections.observableArrayList();
+
     private static final String DB_URL = "jdbc:sqlite:mokki_db.sqlite";
 
     public static List<String[]> executeQuery(String sql) throws SQLException {
@@ -64,6 +72,7 @@ public class DBManager {
         } catch (SQLException e){
             System.out.println("Error inserting Asiakas: " + e.getMessage());
         }
+        DBManager.getAllAsiakkaat();
     }
 
     public static List<Asiakas> getAllAsiakkaat() {
@@ -86,7 +95,30 @@ public class DBManager {
         } catch (SQLException e) {
             System.out.println("Error fetching Asiakkaat: " + e.getMessage());
         }
+        asiakkaat.clear();
+        asiakkaat.addAll(list);
+
         return list;
+    }
+
+    public static void updateAsiakas(Asiakas a) {
+        String sql = "UPDATE Asiakas SET Nimi = ?, Osoite = ?, Sahkoposti = ?, Puhelin = ? WHERE AsiakasID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, a.nimi);
+            pstmt.setString(2, a.osoite);
+            pstmt.setString(3, a.sahkoposti);
+            pstmt.setString(4, a.puhnro);
+            pstmt.setInt(5, a.asiakasID);
+
+            pstmt.executeUpdate();
+            System.out.println("Asiakas updated successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error updating Asiakas: " + e.getMessage());
+        }
+        DBManager.getAllAsiakkaat();
     }
 
     public static void insertMokki(Mokki m) {
@@ -108,6 +140,7 @@ public class DBManager {
         } catch (SQLException e) {
             System.out.println("Error inserting Mökki: " + e.getMessage());
         }
+        DBManager.getAllMokit();
     }
 
     public static List<Mokki> getAllMokit() {
@@ -131,7 +164,31 @@ public class DBManager {
         } catch (SQLException e) {
             System.out.println("Error fetching Mökit: " + e.getMessage());
         }
+        mokkis.clear();
+        mokkis.addAll(list);
         return list;
+    }
+
+    public static void updateMokki(Mokki m) {
+        String sql = "UPDATE Mokki SET Nimi = ?, Osoite = ?, Varustelu = ?, HintaPerYo = ?, Kapasiteetti = ? WHERE MokkiID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, m.nimi);
+            pstmt.setString(2, m.osoite);
+            pstmt.setString(3, m.varustelu);
+            pstmt.setDouble(4, m.hintaPerYo);
+            pstmt.setInt(5, m.kapasiteetti);
+            pstmt.setInt(6, m.mokkiID);
+
+            pstmt.executeUpdate();
+            System.out.println("Mökki updated successfully.");
+            DBManager.getAllMokit();
+        } catch (SQLException e) {
+            System.out.println("Error updating Mökki: " + e.getMessage());
+        }
+        DBManager.getAllMokit();
     }
 
     public static void insertVaraus(Varaus v) {
@@ -172,7 +229,29 @@ public class DBManager {
         } catch (SQLException e) {
             System.out.println("Error fetching Varaukset: " + e.getMessage());
         }
+        varaukset.clear();
+        varaukset.addAll(list);
         return list;
+    }
+
+    public static void updateVaraus(Varaus v) {
+        String sql = "UPDATE Varaus SET AsiakasID = ?, MokkiID = ?, Alkupaiva = ?, Loppupaiva = ? WHERE VarausID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, v.asiakasID);
+            pstmt.setInt(2, v.mokkiID);
+            pstmt.setString(3, v.alkupaiva.toString());
+            pstmt.setString(4, v.loppupaiva.toString());
+            pstmt.setInt(5, v.varausID);
+
+            pstmt.executeUpdate();
+            System.out.println("Varaus updated successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error updating Varaus: " + e.getMessage());
+        }
+        DBManager.getAllVaraukset();
     }
 
     public static void insertLasku(Lasku l) {
@@ -192,6 +271,7 @@ public class DBManager {
         } catch (SQLException e) {
             System.out.println("Error inserting Lasku: " + e.getMessage());
         }
+        DBManager.getAllLaskut();
     }
 
     public static List<Lasku> getAllLaskut() {
@@ -214,66 +294,9 @@ public class DBManager {
         } catch (SQLException e) {
             System.out.println("Error fetching Laskut: " + e.getMessage());
         }
+        laskut.clear();
+        laskut.addAll(list);
         return list;
-    }
-
-    public static void updateMokki(Mokki m) {
-        String sql = "UPDATE Mokki SET Nimi = ?, Osoite = ?, Varustelu = ?, HintaPerYo = ?, Kapasiteetti = ? WHERE MokkiID = ?";
-
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, m.nimi);
-            pstmt.setString(2, m.osoite);
-            pstmt.setString(3, m.varustelu);
-            pstmt.setDouble(4, m.hintaPerYo);
-            pstmt.setInt(5, m.kapasiteetti);
-            pstmt.setInt(6, m.mokkiID);
-
-            pstmt.executeUpdate();
-            System.out.println("Mökki updated successfully.");
-        } catch (SQLException e) {
-            System.out.println("Error updating Mökki: " + e.getMessage());
-        }
-    }
-
-
-    public static void updateAsiakas(Asiakas a) {
-        String sql = "UPDATE Asiakas SET Nimi = ?, Osoite = ?, Sahkoposti = ?, Puhnro = ? WHERE AsiakasID = ?";
-
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, a.nimi);
-            pstmt.setString(2, a.osoite);
-            pstmt.setString(3, a.sahkoposti);
-            pstmt.setString(4, a.puhnro);
-            pstmt.setInt(5, a.asiakasID);
-
-            pstmt.executeUpdate();
-            System.out.println("Asiakas updated successfully.");
-        } catch (SQLException e) {
-            System.out.println("Error updating Asiakas: " + e.getMessage());
-        }
-    }
-
-    public static void updateVaraus(Varaus v) {
-        String sql = "UPDATE Varaus SET AsiakasID = ?, MokkiID = ?, Alkupaiva = ?, Loppupaiva = ? WHERE VarausID = ?";
-
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, v.asiakasID);
-            pstmt.setInt(2, v.mokkiID);
-            pstmt.setString(3, v.alkupaiva.toString());
-            pstmt.setString(4, v.loppupaiva.toString());
-            pstmt.setInt(5, v.varausID);
-
-            pstmt.executeUpdate();
-            System.out.println("Varaus updated successfully.");
-        } catch (SQLException e) {
-            System.out.println("Error updating Varaus: " + e.getMessage());
-        }
     }
 
     public static void updateLasku(Lasku l) {
@@ -293,7 +316,9 @@ public class DBManager {
         } catch (SQLException e) {
             System.out.println("Error updating Lasku: " + e.getMessage());
         }
+        DBManager.getAllLaskut();
     }
+
 
 
 }

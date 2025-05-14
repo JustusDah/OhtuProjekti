@@ -16,12 +16,16 @@ public class LaskuPopup extends SuperPopup{
         super.createPopupSuper("Muokkaa laskua");
 
         GridPane grid = new GridPane();
+        TextField idField = new TextField(String.valueOf(laskuOriginal.laskuID));
+        idField.setEditable(false);
         TextField sumField = new TextField(String.valueOf(laskuOriginal.summa));
         TextField erapaivaField = new TextField(laskuOriginal.erapaiva);
         TextField varausIDField  = new TextField(String.valueOf(laskuOriginal.varausID));
         TextField maksettuField = new TextField(String.valueOf(laskuOriginal.maksettu));
 
 
+        grid.add(new Label("Lasku ID:"), 0, 0);
+        grid.add(idField, 1, 0);
         grid.add(new Label("Summa:"), 0, 1);
         grid.add(sumField, 1, 1);
         grid.add(new Label("Eräpäivä:"), 0, 2);
@@ -32,6 +36,18 @@ public class LaskuPopup extends SuperPopup{
         grid.add(maksettuField, 1, 4);
 
         this.centerPane.getChildren().add(grid);
+
+
+        Button cancelButton = new Button("Peruuta muutokset");
+        cancelButton.setOnAction(e -> {
+            try {
+                sumField.setText(String.valueOf(laskuOriginal.summa));
+                erapaivaField.setText(String.valueOf(laskuOriginal.erapaiva));
+                varausIDField.setText(String.valueOf(laskuOriginal.varausID));
+                maksettuField.setText(String.valueOf(laskuOriginal.maksettu));
+            } catch (Exception _) {
+            }
+        });
 
 
 
@@ -45,13 +61,13 @@ public class LaskuPopup extends SuperPopup{
                 int maksettu = Integer.parseInt(maksettuField.getText());
 
                 Lasku lasku = new Lasku(laskuOriginal.laskuID, summa, erapaiva, varausid, maksettu);
-                //DBManager.updateAsiakas(asiakas);
+                DBManager.updateLasku(lasku);
             } catch (Exception _) {
             }
             this.closePopup();
         });
 
-        bottomRow.getChildren().add(saveButton);
+        bottomRow.getChildren().addAll(cancelButton, saveButton);
 
 
     }

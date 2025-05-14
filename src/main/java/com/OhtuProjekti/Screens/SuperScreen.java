@@ -36,6 +36,11 @@ abstract public class SuperScreen {
     
     public VBox rightPane;
 
+    /**
+     * Basically the list of elements
+     * */
+    VBox buttonBox = new VBox();
+
 
     /** Returns the Pane where the game is drawn
      * @return returns this.screen

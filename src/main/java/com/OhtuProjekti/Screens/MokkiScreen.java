@@ -1,10 +1,14 @@
 package com.OhtuProjekti.Screens;
 
+import com.OhtuProjekti.Classes.Asiakas;
+import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
 import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Popups.InsertMokkiPopup;
 import com.OhtuProjekti.Popups.MokkiPopup;
+import com.OhtuProjekti.Popups.VarausPopup;
 import com.OhtuProjekti.SceneManager;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -33,23 +37,17 @@ public class MokkiScreen extends SuperScreen {
         Text title = new Text("Valitse mökki nähdäksesi tai muokataksesi tietoja:");
         contentBox.getChildren().add(title);
 
-        VBox buttonBox = new VBox(5);
+        buttonBox = new VBox(5);
         buttonBox.setFillWidth(true);
 
-        List<Mokki> mokit = DBManager.getAllMokit();
-        for (Mokki mokki : mokit) {
-            Button button = new Button(mokki.nimi);
-            button.setMaxWidth(Double.MAX_VALUE);
-            button.setPrefWidth(200);
+        DBManager.getAllMokit();
 
-            button.setOnAction(e -> {
-                MokkiPopup mokkiPopup = new MokkiPopup();
-                mokkiPopup.createPopup(mokki);
-                mokkiPopup.showPopup();
-            });
+        rebuildVBox();
 
-            buttonBox.getChildren().add(button);
-        }
+        // Makes the UI list react to changes in the list in DBManager
+        DBManager.mokkis.addListener((ListChangeListener<Mokki>) change -> {
+            rebuildVBox();
+        });
 
         contentBox.getChildren().add(buttonBox);
 
@@ -66,5 +64,26 @@ public class MokkiScreen extends SuperScreen {
         });
         bottomPane.getChildren().add(insertMokkiButton);
 
+    }
+
+    private Button createListButton(Mokki mokki) {
+        Button button = new Button(mokki.nimi + ", osoite: " + mokki.osoite);
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setPrefWidth(200);
+
+        button.setOnAction(e -> {
+            MokkiPopup mokkiPopup = new MokkiPopup();
+            mokkiPopup.createPopup(mokki);
+            mokkiPopup.showPopup();
+        });
+
+        return button;
+    }
+
+    private void rebuildVBox() {
+        buttonBox.getChildren().clear();
+        for (Mokki m : DBManager.mokkis) {
+            buttonBox.getChildren().add(createListButton(m));
+        }
     }
 }

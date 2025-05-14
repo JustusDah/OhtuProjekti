@@ -16,6 +16,8 @@ public class MokkiPopup extends SuperPopup{
         super.createPopupSuper("Muokkaa mökkiä");
 
         GridPane grid = new GridPane();
+        TextField idField = new TextField(String.valueOf(mokkiOriginal.mokkiID));
+        idField.setEditable(false);
         TextField nameField = new TextField(mokkiOriginal.nimi);
         TextField addressField = new TextField(mokkiOriginal.osoite);
         TextField equipmentField = new TextField(mokkiOriginal.varustelu);
@@ -23,6 +25,8 @@ public class MokkiPopup extends SuperPopup{
         TextField capacityField = new TextField(String.valueOf(mokkiOriginal.kapasiteetti));
 
 
+        grid.add(new Label("Mökki ID:"), 0, 0);
+        grid.add(idField, 1, 0);
         grid.add(new Label("Nimi:"), 0, 1);
         grid.add(nameField, 1, 1);
         grid.add(new Label("Osoite:"), 0, 2);
@@ -36,6 +40,17 @@ public class MokkiPopup extends SuperPopup{
 
         this.centerPane.getChildren().add(grid);
 
+        Button cancelButton = new Button("Peruuta muutokset");
+        cancelButton.setOnAction(e -> {
+            try {
+                nameField.setText(mokkiOriginal.nimi);
+                addressField.setText(mokkiOriginal.osoite);
+                equipmentField.setText(mokkiOriginal.varustelu);
+                capacityField.setText(String.valueOf(mokkiOriginal.kapasiteetti));
+                priceField.setText(String.valueOf(mokkiOriginal.hintaPerYo));
+            } catch (Exception _) {
+            }
+        });
 
 
 
@@ -55,7 +70,7 @@ public class MokkiPopup extends SuperPopup{
             this.closePopup();
         });
 
-        bottomRow.getChildren().add(saveButton);
+        bottomRow.getChildren().addAll(cancelButton, saveButton);
 
 
     }

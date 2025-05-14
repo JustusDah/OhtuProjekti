@@ -1,10 +1,13 @@
 package com.OhtuProjekti.Screens;
 
+import com.OhtuProjekti.Classes.Asiakas;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
+import com.OhtuProjekti.Popups.AsiakasPopup;
 import com.OhtuProjekti.Popups.InsertVarausPopup;
 import com.OhtuProjekti.Popups.VarausPopup;
 import com.OhtuProjekti.SceneManager;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -34,25 +37,20 @@ public class VarausScreen extends SuperScreen {
         Text title = new Text("Valitse varaus nähdäksesi tai muokataksesi tietoja:");
         contentBox.getChildren().add(title);
 
-        VBox buttonBox = new VBox(5);
+        buttonBox = new VBox(5);
         buttonBox.setFillWidth(true);
 
-        List<Varaus> varausList = DBManager.getAllVaraukset();
-        for (Varaus varaus : varausList) {
-            Button button = new Button("VarausId: " + String.valueOf(varaus.varausID));
-            button.setMaxWidth(Double.MAX_VALUE);
-            button.setPrefWidth(200);
-
-            button.setOnAction(e -> {
-                VarausPopup varausPopup = new VarausPopup();
-                varausPopup.createPopup(varaus);
-                varausPopup.showPopup();
-            });
-
-            buttonBox.getChildren().add(button);
-        }
-
         contentBox.getChildren().add(buttonBox);
+
+        DBManager.getAllVaraukset();
+
+        rebuildVBox();
+
+        // Makes the UI list react to changes in the list in DBManager
+        DBManager.varaukset.addListener((ListChangeListener<Varaus>) change -> {
+            rebuildVBox();
+        });
+
 
 
         screen.setCenter(contentBox);
@@ -73,6 +71,30 @@ public class VarausScreen extends SuperScreen {
 
 
     }
+
+    private Button createListButton(Varaus varaus) {
+        Button button = new Button("VarausId: " + String.valueOf(varaus.varausID) +
+            ", Alkupaiva: " + String.valueOf(varaus.alkupaiva)
+        );
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setPrefWidth(200);
+
+        button.setOnAction(e -> {
+            VarausPopup varausPopup = new VarausPopup();
+            varausPopup.createPopup(varaus);
+            varausPopup.showPopup();
+        });
+
+        return button;
+    }
+
+    private void rebuildVBox() {
+        buttonBox.getChildren().clear();
+        for (Varaus v : DBManager.varaukset) {
+            buttonBox.getChildren().add(createListButton(v));
+        }
+    }
+
 
 
 }

@@ -1,10 +1,13 @@
 package com.OhtuProjekti.Screens;
 
 import com.OhtuProjekti.Classes.Lasku;
+import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
 import com.OhtuProjekti.Popups.InsertLaskuPopup;
 import com.OhtuProjekti.Popups.LaskuPopup;
+import com.OhtuProjekti.Popups.VarausPopup;
 import com.OhtuProjekti.SceneManager;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -33,28 +36,19 @@ public class LaskuScreen extends SuperScreen {
         Text title = new Text("Valitse lasku nähdäksesi tai muokataksesi tietoja:");
         contentBox.getChildren().add(title);
 
-        VBox buttonBox = new VBox(5);
+        buttonBox = new VBox(5);
         buttonBox.setFillWidth(true);
 
-        Text detailsText = new Text();
-        detailsText.setWrappingWidth(400);
+        DBManager.getAllLaskut();
 
-        List<Lasku> laskut = DBManager.getAllLaskut();
-        for (Lasku lasku : laskut) {
-            Button button = new Button("Lasku ID: " + lasku.laskuID);
-            button.setMaxWidth(Double.MAX_VALUE);
-            button.setPrefWidth(200);
+        rebuildVBox();
 
-            button.setOnAction(e -> {
-                LaskuPopup laskuPopup = new LaskuPopup();
-                laskuPopup.createPopup(lasku);
-                laskuPopup.showPopup();
-            });
+        // Makes the UI list react to changes in the list in DBManager
+        DBManager.varaukset.addListener((ListChangeListener<Varaus>) change -> {
+            rebuildVBox();
+        });
 
-            buttonBox.getChildren().add(button);
-        }
-
-        contentBox.getChildren().addAll(buttonBox, detailsText);
+        contentBox.getChildren().addAll(buttonBox);
 
 
         screen.setCenter(contentBox);
@@ -69,5 +63,26 @@ public class LaskuScreen extends SuperScreen {
         });
         bottomPane.getChildren().add(insertLaskuButton);
 
+    }
+
+    private Button createListButton(Lasku lasku) {
+        Button button = new Button("Lasku ID: " + lasku.laskuID);
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setPrefWidth(200);
+
+        button.setOnAction(e -> {
+            LaskuPopup laskuPopup = new LaskuPopup();
+            laskuPopup.createPopup(lasku);
+            laskuPopup.showPopup();
+        });
+
+        return button;
+    }
+
+    private void rebuildVBox() {
+        buttonBox.getChildren().clear();
+        for (Lasku l : DBManager.laskut) {
+            buttonBox.getChildren().add(createListButton(l));
+        }
     }
 }
