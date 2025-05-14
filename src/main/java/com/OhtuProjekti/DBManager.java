@@ -192,21 +192,23 @@ public class DBManager {
     }
 
     public static void insertVaraus(Varaus v) {
-        String sql = "INSERT INTO Varaus (VarausID, AsiakasID, MokkiID) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Varaus (AsiakasID, MokkiID, alkupaiva, loppupaiva) VALUES (?, ?, ?, ?)";
 
         System.out.println("Inserting Varaus");
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, v.varausID);
-            pstmt.setInt(2, v.asiakasID);
-            pstmt.setInt(3, v.mokkiID);
+            pstmt.setInt(1, v.asiakasID);
+            pstmt.setInt(2, v.mokkiID);
+            pstmt.setString(3, v.alkupaiva);
+            pstmt.setString(4, v.loppupaiva);
 
             pstmt.executeUpdate();
             System.out.println("Varaus inserted successfully.");
         } catch (SQLException e) {
             System.out.println("Error inserting Varaus: " + e.getMessage());
         }
+        DBManager.getAllVaraukset();
     }
 
     public static List<Varaus> getAllVaraukset() {
