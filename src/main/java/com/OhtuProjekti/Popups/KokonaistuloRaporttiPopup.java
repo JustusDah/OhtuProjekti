@@ -2,6 +2,7 @@ package com.OhtuProjekti.Popups;
 
 import com.OhtuProjekti.Classes.Lasku;
 import com.OhtuProjekti.DBManager;
+import com.OhtuProjekti.Utils;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -29,7 +30,16 @@ public class KokonaistuloRaporttiPopup extends SuperPopup {
         System.out.println(currentYearMonth);
 
         while (currentYearMonth.isBefore(YearMonth.now())) {
-            double tulot = 100;
+            double tulot = 0;
+            for (Lasku lasku : laskutList) {
+                YearMonth laskuYearMonth = Utils.calculateYearMonthFromString(lasku.erapaiva);
+                if (laskuYearMonth.equals(currentYearMonth)){
+                    if (lasku.maksettu == 1) {
+                        tulot += lasku.summa;
+                    }
+
+                }
+            }
 
             vBox.getChildren().add(createReportRow(currentYearMonth, tulot));
             currentYearMonth = currentYearMonth.plusMonths(1);
