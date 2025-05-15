@@ -19,25 +19,29 @@ public class KokonaistuloRaporttiPopup extends SuperPopup {
         ArrayList<Lasku> laskutList = new ArrayList<>(DBManager.laskut.stream().toList());
 
         YearMonth currentYearMonth;
+        YearMonth lastYearMonth;
         laskutList.sort(new LaskuErapaivaComparator());
         String firstErapaiva = laskutList.getFirst().erapaiva;
+        String lastErapaiva = laskutList.getLast().erapaiva;
         currentYearMonth = YearMonth.parse(firstErapaiva.substring(0,firstErapaiva.length()-3));
+
+        lastYearMonth = YearMonth.parse(lastErapaiva.substring(0,lastErapaiva.length()-3));
+
         VBox vBox = new VBox();
 
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(10, 10, 10, 10));
 
-        System.out.println(currentYearMonth);
 
-        while (currentYearMonth.isBefore(YearMonth.now())) {
+
+        while (currentYearMonth.isBefore(lastYearMonth.plusMonths(1))) {
             double tulot = 0;
             for (Lasku lasku : laskutList) {
                 YearMonth laskuYearMonth = Utils.calculateYearMonthFromString(lasku.erapaiva);
                 if (laskuYearMonth.equals(currentYearMonth)){
                     if (lasku.maksettu == 1) {
-                        tulot += lasku.summa;
+                        tulot = tulot + lasku.summa;
                     }
-
                 }
             }
 
