@@ -47,8 +47,8 @@ public class InsertVarausPopup extends SuperPopup{
                 ArrayList<Integer> originalVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
                         varauss -> varauss.varausID
                 ).toList());
-                DBManager.insertVaraus(varaus);
-
+                DBManager.insertVarausWithLasku(varaus);
+/*
                 ArrayList<Integer> newVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
                         varauss -> varauss.varausID
                 ).toList());
@@ -64,8 +64,7 @@ public class InsertVarausPopup extends SuperPopup{
                         newVarausIdList.getFirst(),
                         0
                     );
-                System.out.println(lasku.varausID);
-                DBManager.insertLasku(lasku);
+                DBManager.insertLasku(lasku);*/
             } catch (Exception _) {
             }
             this.closePopup();

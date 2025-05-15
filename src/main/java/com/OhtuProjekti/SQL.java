@@ -64,6 +64,7 @@ public class SQL {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        generateExampleData();
     }
 
     public static void generateExampleData(){
@@ -75,9 +76,9 @@ public class SQL {
         DBManager.insertMokki(new Mokki(2, "Järvimökki", "Järventie 2", "Sähkö, Vesi, Vene", 150.0, 6));
         DBManager.insertMokki(new Mokki(3, "Tunturimökki", "Tunturikuja 3", "Sähkö, Takka", 100.0, 3));
 
-        DBManager.insertVaraus(new Varaus(1, 1, 1, "2025-06-01", "2025-06-05"));
-        DBManager.insertVaraus(new Varaus(2, 2, 2, "2025-07-10", "2025-07-15"));
-        DBManager.insertVaraus(new Varaus(3, 3, 3, "2025-08-20", "2025-08-25"));
+        DBManager.insertVarausWithLasku(new Varaus(1, 1, 1, "2025-06-01", "2025-06-05"));
+        DBManager.insertVarausWithLasku(new Varaus(2, 2, 2, "2025-07-10", "2025-07-15"));
+        DBManager.insertVarausWithLasku(new Varaus(3, 3, 3, "2025-08-20", "2025-08-25"));
 
         /*
         DBManager.insertLasku(new Lasku(1, 480.0, "2025-06-10", 1, 0));

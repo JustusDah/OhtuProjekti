@@ -213,11 +213,36 @@ public class DBManager {
 
             pstmt.executeUpdate();
 
-
+            System.out.println("Varaus inserted successfully.");
         } catch (SQLException e) {
             System.out.println("Error inserting Varaus: " + e.getMessage());
         }
         DBManager.getAllVaraukset();
+    }
+
+    public static void insertVarausWithLasku(Varaus v){
+
+        ArrayList<Integer> originalVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
+                varauss -> varauss.varausID
+        ).toList());
+
+        DBManager.insertVaraus(v);
+
+        ArrayList<Integer> newVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
+                varauss -> varauss.varausID
+        ).toList());
+
+
+        newVarausIdList.removeAll(originalVarausIdList);
+
+        Lasku lasku = new Lasku(
+                Utils.calculatePriceFromDates(v.alkupaiva, v.loppupaiva, v.mokkiID),
+                v.alkupaiva,
+                newVarausIdList.getFirst(),
+                0
+        );
+        DBManager.insertLasku(lasku);
+
     }
 
     public static List<Varaus> getAllVaraukset() {
