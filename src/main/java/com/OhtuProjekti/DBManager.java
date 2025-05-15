@@ -211,7 +211,8 @@ public class DBManager {
             pstmt.setString(4, v.loppupaiva);
 
             pstmt.executeUpdate();
-            System.out.println("Varaus inserted successfully.");
+
+
         } catch (SQLException e) {
             System.out.println("Error inserting Varaus: " + e.getMessage());
         }

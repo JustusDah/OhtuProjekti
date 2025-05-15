@@ -51,17 +51,14 @@ public class Utils {
         return tuotto;
     }
 
-    public static double calculateJotain(String alkuPaiva, String loppuPaiva, int mokkiId){
-        Varaus varaus = DBManager.varaukset.filtered(varauss -> varauss.varausID == varausId).getFirst();
-        LocalDate alkPaiva = LocalDate.parse(varaus.alkupaiva);
-        LocalDate loppPaiva = LocalDate.parse(varaus.loppupaiva);
+    public static double calculatePriceFromDates(String alkuPaiva, String loppuPaiva, int mokkiId){
+        LocalDate alkPaiva = LocalDate.parse(alkuPaiva);
+        LocalDate loppPaiva = LocalDate.parse(loppuPaiva);
 
-        double hintaPerYo = DBManager.mokkis.filtered(mokki -> mokki.mokkiID == varaus.mokkiID).getFirst().hintaPerYo;
+        double hintaPerYo = DBManager.mokkis.filtered(mokki -> mokki.mokkiID == mokkiId).getFirst().hintaPerYo;
 
         long yot = ChronoUnit.DAYS.between(alkPaiva, loppPaiva);
         double tuotto = yot * hintaPerYo;
-
-        System.out.println(tuotto);
 
         return tuotto;
     }

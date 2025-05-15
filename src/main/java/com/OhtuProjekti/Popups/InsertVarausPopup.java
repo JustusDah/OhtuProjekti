@@ -1,7 +1,6 @@
 package com.OhtuProjekti.Popups;
 
 import com.OhtuProjekti.Classes.Lasku;
-import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
 import com.OhtuProjekti.Utils;
@@ -10,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-import java.sql.Date;
+import java.util.ArrayList;
 
 public class InsertVarausPopup extends SuperPopup{
     public void createPopup(){
@@ -45,8 +44,28 @@ public class InsertVarausPopup extends SuperPopup{
 
                 Varaus varaus = new Varaus( asiakasId, mokkiId, alkupaiva, loppupaiva);
 
+                ArrayList<Integer> originalVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
+                        varauss -> varauss.varausID
+                ).toList());
                 DBManager.insertVaraus(varaus);
-                Lasku lasku = new Lasku();
+
+                ArrayList<Integer> newVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
+                        varauss -> varauss.varausID
+                ).toList());
+
+                System.out.println(newVarausIdList);
+
+                newVarausIdList.removeAll(originalVarausIdList);
+                System.out.println(newVarausIdList);
+
+                Lasku lasku = new Lasku(
+                        Utils.calculatePriceFromDates(alkupaiva, loppupaiva, mokkiId),
+                        alkupaiva,
+                        newVarausIdList.getFirst(),
+                        0
+                    );
+                System.out.println(lasku.varausID);
+                DBManager.insertLasku(lasku);
             } catch (Exception _) {
             }
             this.closePopup();
