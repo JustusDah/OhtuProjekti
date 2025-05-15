@@ -3,6 +3,7 @@ package com.OhtuProjekti.Popups;
 import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
+import com.OhtuProjekti.Utils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -109,7 +110,13 @@ public class VarausPopup extends SuperPopup{
                 System.out.println("Error saving: " + exception.getMessage());
             }
             this.closePopup();
+
+            Button tuottoButtonTesti = new Button("Laske tuotto");
+            tuottoButtonTesti.setOnAction(e ->{
+                Utils.CalculateNightsAndPrice(varausOriginal.varausID, );
+            });
         });
+
 
         bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton);
 

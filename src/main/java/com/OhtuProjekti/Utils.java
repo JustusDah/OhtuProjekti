@@ -31,10 +31,10 @@ public class Utils {
 
     public static final Color TITLE_TEXT_COLOR = Color.DEEPPINK;
 
-    public static double CalculateNightsAndPrice(){
-        String alotusPaivaStr = DBManager.varaukset.filtered()
-        String lopetusPaivaStr = DBManager.varaukset.getFirst().loppupaiva;
-        double hintaPerYo = DBManager.mokkis.getFirst().hintaPerYo;
+    public static double CalculateNightsAndPrice(int varausId, double hintaPerYo){
+        String alotusPaivaStr = DBManager.varaukset.filtered(varaus -> varaus.varausID == varausId).getFirst().alkupaiva;
+        String lopetusPaivaStr = DBManager.varaukset.filtered(varaus -> varaus.varausID == varausId).getFirst().loppupaiva;
+
 
         LocalDate alkuPaiva = LocalDate.parse(alotusPaivaStr);
         LocalDate loppuPaiva = LocalDate.parse(lopetusPaivaStr);
