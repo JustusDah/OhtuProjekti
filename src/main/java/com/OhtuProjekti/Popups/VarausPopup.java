@@ -116,7 +116,7 @@ public class VarausPopup extends SuperPopup{
 
         Button tuottoButtonTesti = new Button("Laske tuotto");
         tuottoButtonTesti.setOnAction(event ->{
-            Utils.CalculateNightsAndPrice(varausOriginal.varausID);
+            Utils.calculateNightsAndPrice(varausOriginal.varausID);
         });
 
 
