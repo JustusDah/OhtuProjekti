@@ -3,10 +3,13 @@ package com.OhtuProjekti.Popups;
 import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+
+import java.util.NoSuchElementException;
 
 public class VarausPopup extends SuperPopup{
     private Varaus varausOriginal;
@@ -26,15 +29,25 @@ public class VarausPopup extends SuperPopup{
         TextField alkupaivaField = new TextField(String.valueOf(varausOriginal.alkupaiva));
         TextField loppupaivaField = new TextField(String.valueOf(varausOriginal.loppupaiva));
 
+
         Button naytaMokkiButton = new Button("Näytä mökki");
         naytaMokkiButton.setOnAction(e -> {
-            MokkiPopup popup = new MokkiPopup();
-            Mokki mokkiOfVaraus = DBManager.mokkis.filtered(
-                    mokki -> mokki.mokkiID == varausOriginal.mokkiID
-            ).getFirst();
-            popup.createPopup(mokkiOfVaraus);
-            popup.showPopup();
+            try {
+                MokkiPopup popup = new MokkiPopup();
+                Mokki mokkiOfVaraus = DBManager.mokkis.filtered(
+                        mokki -> mokki.mokkiID == varausOriginal.mokkiID
+                ).getFirst();
+                popup.createPopup(mokkiOfVaraus);
+                popup.showPopup();
+            } catch (NoSuchElementException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Virhe");
+                alert.setHeaderText("Mökkiä ei löytynyt");
+                alert.setContentText("Varausta vastaavaa mökkiä ei löytynyt tietokannasta.");
+                alert.showAndWait();
+            }
         });
+
 
         grid.add(new Label("Varaus ID:"), 0, 1);
         grid.add(idField, 1, 1);
