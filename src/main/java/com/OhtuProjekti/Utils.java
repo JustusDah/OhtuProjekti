@@ -57,4 +57,20 @@ public class Utils {
         return yearMonth;
     }
 
+    public static int calculateNumberOfDays(YearMonth yearMonth, String alkupaiva, String loppupaiva) {
+        int output = 0;
+        LocalDate alkupaivaLocalDate = LocalDate.parse(alkupaiva);
+        LocalDate loppupaivaLocalDate = LocalDate.parse(loppupaiva);
+
+        while (alkupaivaLocalDate.isBefore(loppupaivaLocalDate)){
+            if (YearMonth.from(alkupaivaLocalDate).equals(yearMonth)) {
+                output++;
+            }
+            alkupaivaLocalDate = alkupaivaLocalDate.plusDays(1);
+        }
+        return output;
+
+
+    }
+
 }
