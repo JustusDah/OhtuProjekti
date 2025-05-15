@@ -111,14 +111,16 @@ public class VarausPopup extends SuperPopup{
             }
             this.closePopup();
 
-            Button tuottoButtonTesti = new Button("Laske tuotto");
-            tuottoButtonTesti.setOnAction(e ->{
-                Utils.CalculateNightsAndPrice(varausOriginal.varausID, );
-            });
+
+        });
+
+        Button tuottoButtonTesti = new Button("Laske tuotto");
+        tuottoButtonTesti.setOnAction(event ->{
+            Utils.CalculateNightsAndPrice(varausOriginal.varausID);
         });
 
 
-        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton);
+        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton, tuottoButtonTesti);
 
 
     }

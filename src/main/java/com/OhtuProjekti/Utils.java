@@ -1,5 +1,6 @@
 package com.OhtuProjekti;
 
+import com.OhtuProjekti.Classes.Varaus;
 import javafx.scene.paint.Color;
 
 import java.time.LocalDate;
@@ -31,13 +32,17 @@ public class Utils {
 
     public static final Color TITLE_TEXT_COLOR = Color.DEEPPINK;
 
-    public static double CalculateNightsAndPrice(int varausId, double hintaPerYo){
-        String alotusPaivaStr = DBManager.varaukset.filtered(varaus -> varaus.varausID == varausId).getFirst().alkupaiva;
-        String lopetusPaivaStr = DBManager.varaukset.filtered(varaus -> varaus.varausID == varausId).getFirst().loppupaiva;
+    public static double CalculateNightsAndPrice(int varausId){
+        Varaus varaus = DBManager.varaukset.filtered(varauss -> varauss.varausID == varausId).getFirst();
+        String alotusPaivaStr = varaus.alkupaiva;
+        String lopetusPaivaStr = varaus.loppupaiva;
+
 
 
         LocalDate alkuPaiva = LocalDate.parse(alotusPaivaStr);
         LocalDate loppuPaiva = LocalDate.parse(lopetusPaivaStr);
+
+        double hintaPerYo = DBManager.mokkis.filtered(mokki -> mokki.mokkiID == varaus.mokkiID).getFirst().hintaPerYo;
 
         long yot = ChronoUnit.DAYS.between(alkuPaiva, loppuPaiva);
         double tuotto = yot * hintaPerYo;

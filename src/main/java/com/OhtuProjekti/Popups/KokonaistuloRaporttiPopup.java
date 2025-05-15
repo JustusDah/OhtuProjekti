@@ -29,7 +29,7 @@ public class KokonaistuloRaporttiPopup extends SuperPopup {
         System.out.println(currentYearMonth);
 
         while (currentYearMonth.isBefore(YearMonth.now())) {
-            double tulot =
+            double tulot = 100;
 
             vBox.getChildren().add(createReportRow(currentYearMonth, tulot));
             currentYearMonth = currentYearMonth.plusMonths(1);
