@@ -20,6 +20,7 @@ public class DBManager {
     public static ObservableList<Varaus> varaukset = FXCollections.observableArrayList();
 
     private static final String DB_URL = "jdbc:sqlite:mokki_db.sqlite";
+    public static ObservableList<Object> asiakass;
 
     public static List<String[]> executeQuery(String sql) throws SQLException {
         try (Connection conn = DriverManager.getConnection(DB_URL);

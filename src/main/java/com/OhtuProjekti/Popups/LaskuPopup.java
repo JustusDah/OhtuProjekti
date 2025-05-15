@@ -1,11 +1,16 @@
 package com.OhtuProjekti.Popups;
 
 import com.OhtuProjekti.Classes.Lasku;
+import com.OhtuProjekti.Classes.Mokki;
+import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+
+import java.util.NoSuchElementException;
 
 public class LaskuPopup extends SuperPopup{
     private Lasku laskuOriginal;
@@ -25,6 +30,30 @@ public class LaskuPopup extends SuperPopup{
         TextField varausIDField  = new TextField(String.valueOf(laskuOriginal.varausID));
         TextField maksettuField = new TextField(String.valueOf(laskuOriginal.maksettu));
 
+        Button naytaVarausButton = new Button("Näytä varaus");
+        naytaVarausButton.setOnAction(e -> {
+            try {
+                VarausPopup popup = new VarausPopup();
+                Varaus varausOfVaraus = DBManager.varaukset.filtered(
+                        varaus -> varaus.varausID == laskuOriginal.varausID
+                ).getFirst();
+                popup.createPopup(varausOfVaraus);
+                popup.showPopup();
+            } catch (NoSuchElementException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Virhe");
+                alert.setHeaderText("Varausta ei löytynyt");
+                alert.setContentText("Laskua vastaavaa varausta ei löytynyt tietokannasta.");
+                alert.showAndWait();
+            }
+        });
+
+
+        Button maksuButton = new Button("Merkitse maksetuksi");
+        maksuButton.setOnAction(e -> {
+           maksettuField.setText("1");
+        });
+
 
         grid.add(new Label("Lasku ID:"), 0, 0);
         grid.add(idField, 1, 0);
@@ -34,8 +63,10 @@ public class LaskuPopup extends SuperPopup{
         grid.add(erapaivaField, 1, 2);
         grid.add(new Label("VarausID:"), 0, 3);
         grid.add(varausIDField, 1, 3);
-        grid.add(new Label("Maksettu:"), 0, 4);
+        grid.add(naytaVarausButton, 2, 3);
+        grid.add(new Label("Maksettu (0 = Ei, 1 = Kyllä):"), 0, 4);
         grid.add(maksettuField, 1, 4);
+        grid.add(maksuButton, 2, 4);
 
         this.centerPane.getChildren().add(grid);
 

@@ -79,10 +79,11 @@ public class SQL {
         DBManager.insertVaraus(new Varaus(2, 2, 2, "2025-07-10", "2025-07-15"));
         DBManager.insertVaraus(new Varaus(3, 3, 3, "2025-08-20", "2025-08-25"));
 
+        /*
         DBManager.insertLasku(new Lasku(1, 480.0, "2025-06-10", 1, 0));
         DBManager.insertLasku(new Lasku(2, 750.0, "2025-07-20", 2, 1));
         DBManager.insertLasku(new Lasku(3, 500.0, "2025-08-30", 3, 0));
-
+*/
         System.out.println("Example data generated");
     }
 }

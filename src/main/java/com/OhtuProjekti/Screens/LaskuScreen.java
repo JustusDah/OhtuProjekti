@@ -66,7 +66,12 @@ public class LaskuScreen extends SuperScreen {
     }
 
     private Button createListButton(Lasku lasku) {
-        Button button = new Button("Lasku ID: " + lasku.laskuID);
+        String maksettuString = "Kyllä";
+        if (lasku.maksettu == 0) maksettuString = "Ei";
+        Button button = new Button("Lasku ID: " + lasku.laskuID +
+                ", Eräpäivä: " + lasku.erapaiva+
+                ", Maksettu: " + maksettuString
+        );
         button.setMaxWidth(Double.MAX_VALUE);
         button.setPrefWidth(200);
 

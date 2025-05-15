@@ -1,5 +1,6 @@
 package com.OhtuProjekti.Popups;
 
+import com.OhtuProjekti.Classes.Asiakas;
 import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
@@ -30,6 +31,23 @@ public class VarausPopup extends SuperPopup{
         TextField alkupaivaField = new TextField(String.valueOf(varausOriginal.alkupaiva));
         TextField loppupaivaField = new TextField(String.valueOf(varausOriginal.loppupaiva));
 
+        Button naytaAsiakasButton = new Button("Näytä asiakas");
+        naytaAsiakasButton.setOnAction(e -> {
+            try {
+                AsiakasPopup popup = new AsiakasPopup();
+                Asiakas asiakasOfVaraus = DBManager.asiakkaat.filtered(
+                        asiakas -> asiakas.asiakasID == varausOriginal.asiakasID
+                ).getFirst();
+                popup.createPopup(asiakasOfVaraus);
+                popup.showPopup();
+            } catch (NoSuchElementException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Virhe");
+                alert.setHeaderText("Asiakasta ei löytynyt");
+                alert.setContentText("Varausta vastaavaa asiakasta ei löytynyt tietokannasta.");
+                alert.showAndWait();
+            }
+        });
 
         Button naytaMokkiButton = new Button("Näytä mökki");
         naytaMokkiButton.setOnAction(e -> {
@@ -54,6 +72,7 @@ public class VarausPopup extends SuperPopup{
         grid.add(idField, 1, 1);
         grid.add(new Label("Asiakas ID:"), 0, 2);
         grid.add(asiakasIdField, 1, 2);
+        grid.add(naytaAsiakasButton, 2, 2);
         grid.add(new Label("Mökki ID:"), 0, 3);
         grid.add(mokkiIdField, 1, 3);
         grid.add(naytaMokkiButton, 2, 3);
@@ -114,13 +133,8 @@ public class VarausPopup extends SuperPopup{
 
         });
 
-        Button tuottoButtonTesti = new Button("Laske tuotto");
-        tuottoButtonTesti.setOnAction(event ->{
-            Utils.calculateNightsAndPrice(varausOriginal.varausID);
-        });
 
-
-        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton, tuottoButtonTesti);
+        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton);
 
 
     }

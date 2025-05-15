@@ -74,7 +74,9 @@ public class VarausScreen extends SuperScreen {
 
     private Button createListButton(Varaus varaus) {
         Button button = new Button("VarausId: " + String.valueOf(varaus.varausID) +
-            ", Alkupaiva: " + String.valueOf(varaus.alkupaiva)
+            ", Alkupäivä: " + String.valueOf(varaus.alkupaiva)+
+                ", Loppupäivä: " + String.valueOf(varaus.loppupaiva)+
+                ", Mökin id: " + String.valueOf(varaus.mokkiID)
         );
         button.setMaxWidth(Double.MAX_VALUE);
         button.setPrefWidth(200);
