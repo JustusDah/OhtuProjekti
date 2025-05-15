@@ -32,7 +32,6 @@ public class VarausPopup extends SuperPopup{
             Mokki mokkiOfVaraus = DBManager.mokkis.filtered(
                     mokki -> mokki.mokkiID == varausOriginal.mokkiID
             ).getFirst();
-            System.out.println(mokkiOfVaraus);
             popup.createPopup(mokkiOfVaraus);
             popup.showPopup();
         });
