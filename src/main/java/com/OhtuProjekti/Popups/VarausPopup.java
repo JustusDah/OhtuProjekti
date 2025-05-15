@@ -1,5 +1,6 @@
 package com.OhtuProjekti.Popups;
 
+import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
 import javafx.scene.control.Button;
@@ -23,6 +24,16 @@ public class VarausPopup extends SuperPopup{
         TextField alkupaivaField = new TextField(String.valueOf(varausOriginal.alkupaiva));
         TextField loppupaivaField = new TextField(String.valueOf(varausOriginal.loppupaiva));
 
+        Button naytaMokkiButton = new Button("Näytä mökki");
+        naytaMokkiButton.setOnAction(e -> {
+            MokkiPopup popup = new MokkiPopup();
+            Mokki mokkiOfVaraus = DBManager.mokkis.filtered(
+                    mokki -> mokki.mokkiID == varausOriginal.mokkiID
+            ).getFirst();
+            System.out.println(mokkiOfVaraus);
+            popup.createPopup(mokkiOfVaraus);
+            popup.showPopup();
+        });
 
         grid.add(new Label("Varaus ID:"), 0, 1);
         grid.add(idField, 1, 1);
@@ -30,6 +41,7 @@ public class VarausPopup extends SuperPopup{
         grid.add(asiakasIdField, 1, 2);
         grid.add(new Label("Mökki ID:"), 0, 3);
         grid.add(mokkiIdField, 1, 3);
+        grid.add(naytaMokkiButton, 2, 3);
         grid.add(new Label("Alkupäivä:"), 0, 4);
         grid.add(alkupaivaField, 1, 4);
         grid.add(new Label("Loppupäivä:"), 0, 5);

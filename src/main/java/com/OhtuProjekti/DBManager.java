@@ -54,6 +54,13 @@ public class DBManager {
         }
     }
 
+    public static void getAllData() {
+        getAllMokit();
+        getAllAsiakkaat();
+        getAllLaskut();
+        getAllVaraukset();
+    }
+
     public static void  insertAsiakas(Asiakas a){
         String sql = "INSERT INTO Asiakas (Nimi, Osoite, Puhelin, Sahkoposti) VALUES (?, ?, ?, ?)";
 

@@ -1,4 +1,5 @@
 package com.OhtuProjekti.Screens;
+import com.OhtuProjekti.DBManager;
 import com.OhtuProjekti.SceneManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -32,6 +33,8 @@ public class MainMenuScreen extends SuperScreen {
      */
     public void createScreen(){
         super.createScreenSuperNoBack("Menu");
+
+        DBManager.getAllData();
 
         VBox menuBox = new VBox();
         menuBox.setAlignment(Pos.CENTER);
