@@ -32,7 +32,7 @@ public class MainMenuScreen extends SuperScreen {
      * Initializes the app and creates the Pane layout for drawing the main menu
      */
     public void createScreen(){
-        super.createScreenSuperNoBack("Menu");
+        super.createScreenSuperNoBack("Mökkikodit varausjärjestelmä");
 
         DBManager.getAllData();
 

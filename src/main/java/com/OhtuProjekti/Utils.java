@@ -22,14 +22,14 @@ public class Utils {
     /**
      * Window width
      */
-    public static final double SCREEN_WIDTH = 1100;
+    public static final double SCREEN_WIDTH = 1000;
     /**
      * Window height
      */
-    public static final double SCREEN_HEIGHT = 700;
+    public static final double SCREEN_HEIGHT = 600;
 
-    public static final double POPUP_WIDTH = 600;
-    public static final double POPUP_HEIGHT = 500;
+    public static final double POPUP_WIDTH = 500;
+    public static final double POPUP_HEIGHT = 400;
 
     public static final Color TITLE_TEXT_COLOR = Color.BLACK;
 
