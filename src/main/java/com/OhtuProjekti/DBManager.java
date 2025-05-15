@@ -7,6 +7,7 @@ import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.sqlite.core.DB;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -326,6 +327,67 @@ public class DBManager {
         }
         DBManager.getAllLaskut();
     }
+
+    public static void deleteAsiakas(int asiakasID) {
+        String sql = "DELETE FROM Asiakas WHERE AsiakasID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, asiakasID);
+            pstmt.executeUpdate();
+            System.out.println("Asiakas deleted successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error deleting Asiakas: " + e.getMessage());
+        }
+        getAllAsiakkaat();
+    }
+
+    public static void deleteMokki(int mokkiID) {
+        String sql = "DELETE FROM Mokki WHERE MokkiID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, mokkiID);
+            pstmt.executeUpdate();
+            System.out.println("Mökki deleted successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error deleting Mökki: " + e.getMessage());
+        }
+        getAllMokit();
+    }
+
+    public static void deleteVaraus(int varausID) {
+        String sql = "DELETE FROM Varaus WHERE VarausID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, varausID);
+            pstmt.executeUpdate();
+            System.out.println("Varaus deleted successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error deleting Varaus: " + e.getMessage());
+        }
+        getAllVaraukset();
+    }
+
+    public static void deleteLasku(int laskuID) {
+        String sql = "DELETE FROM Lasku WHERE LaskuID = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, laskuID);
+            pstmt.executeUpdate();
+            System.out.println("Lasku deleted successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error deleting Lasku: " + e.getMessage());
+        }
+        getAllLaskut();
+    }
+
 
 
 

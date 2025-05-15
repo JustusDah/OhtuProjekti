@@ -44,7 +44,7 @@ public class LaskuScreen extends SuperScreen {
         rebuildVBox();
 
         // Makes the UI list react to changes in the list in DBManager
-        DBManager.varaukset.addListener((ListChangeListener<Varaus>) change -> {
+        DBManager.laskut.addListener((ListChangeListener<Lasku>) change -> {
             rebuildVBox();
         });
 

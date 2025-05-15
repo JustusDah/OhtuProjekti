@@ -10,6 +10,9 @@ import javafx.scene.layout.GridPane;
 public class MokkiPopup extends SuperPopup{
     private Mokki mokkiOriginal;
 
+
+    private boolean confirmDelete = false;
+
     public void createPopup(Mokki mokkiInput){
         mokkiOriginal = mokkiInput;
 
@@ -40,6 +43,25 @@ public class MokkiPopup extends SuperPopup{
 
         this.centerPane.getChildren().add(grid);
 
+        Button deleteButton = new Button("Poista");
+        deleteButton.setOnAction(e -> {
+            if (!confirmDelete){
+                confirmDelete = true;
+                deleteButton.setText("Oikeasti poista?");
+            }
+            else {
+                try {
+                    DBManager.deleteMokki(mokkiOriginal.mokkiID);
+                    this.closePopup();
+                }
+                catch (Exception exception) {
+                    System.out.println("Error deleting: " + exception.getMessage());
+                }
+            }
+        });
+
+
+
         Button cancelButton = new Button("Peruuta muutokset");
         cancelButton.setOnAction(e -> {
             try {
@@ -65,12 +87,14 @@ public class MokkiPopup extends SuperPopup{
 
                 Mokki mokki = new Mokki(mokkiOriginal.mokkiID, nimi, osoite, varustelu, hinta, kapasiteetti);
                 DBManager.updateMokki(mokki);
-            } catch (Exception _) {
+            } catch (Exception exception) {
+                System.out.println("Error saving: " + exception.getMessage());
             }
             this.closePopup();
         });
 
-        bottomRow.getChildren().addAll(cancelButton, saveButton);
+        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton);
+
 
 
     }

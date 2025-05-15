@@ -10,6 +10,9 @@ import javafx.scene.layout.GridPane;
 public class AsiakasPopup extends SuperPopup{
     private Asiakas asiakasOriginal;
 
+
+    private boolean confirmDelete = false;
+
     public void createPopup(Asiakas asiakasInput){
         asiakasOriginal = asiakasInput;
 
@@ -38,6 +41,24 @@ public class AsiakasPopup extends SuperPopup{
         this.centerPane.getChildren().add(grid);
 
 
+        Button deleteButton = new Button("Poista");
+        deleteButton.setOnAction(e -> {
+            if (!confirmDelete){
+                confirmDelete = true;
+                deleteButton.setText("Oikeasti poista?");
+            }
+            else {
+                try {
+                    DBManager.deleteAsiakas(asiakasOriginal.asiakasID);
+                    this.closePopup();
+                }
+                catch (Exception exception) {
+                    System.out.println("Error deleting: " + exception.getMessage());
+                }
+            }
+        });
+
+
         Button cancelButton = new Button("Peruuta muutokset");
         cancelButton.setOnAction(e -> {
             try {
@@ -60,12 +81,13 @@ public class AsiakasPopup extends SuperPopup{
 
                 Asiakas asiakas = new Asiakas(asiakasOriginal.asiakasID, nimi, osoite, puhnro, email);
                 DBManager.updateAsiakas(asiakas);
-            } catch (Exception _) {
+            } catch (Exception exception) {
+                System.out.println("Error saving: " + exception.getMessage());
             }
             this.closePopup();
         });
 
-        bottomRow.getChildren().addAll(cancelButton, saveButton);
+        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton);
 
 
     }

@@ -11,6 +11,8 @@ import javafx.scene.layout.GridPane;
 public class VarausPopup extends SuperPopup{
     private Varaus varausOriginal;
 
+    private boolean confirmDelete = false;
+
     public void createPopup(Varaus varausInput){
         varausOriginal = varausInput;
 
@@ -49,6 +51,24 @@ public class VarausPopup extends SuperPopup{
 
         this.centerPane.getChildren().add(grid);
 
+        Button deleteButton = new Button("Poista");
+        deleteButton.setOnAction(e -> {
+            if (!confirmDelete){
+                confirmDelete = true;
+                deleteButton.setText("Oikeasti poista?");
+            }
+            else {
+                try {
+                    DBManager.deleteVaraus(varausOriginal.varausID);
+                    this.closePopup();
+                }
+                catch (Exception exception) {
+                    System.out.println("Error deleting: " + exception.getMessage());
+                }
+            }
+        });
+
+
 
         Button cancelButton = new Button("Peruuta muutokset");
         cancelButton.setOnAction(e -> {
@@ -73,12 +93,13 @@ public class VarausPopup extends SuperPopup{
 
                 Varaus varaus = new Varaus(varausOriginal.varausID, asiakasID, mokkiID, alkupaiva, loppupaiva);
                 DBManager.updateVaraus(varaus);
-            } catch (Exception _) {
+            } catch (Exception exception) {
+                System.out.println("Error saving: " + exception.getMessage());
             }
             this.closePopup();
         });
 
-        bottomRow.getChildren().addAll(cancelButton, saveButton);
+        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton);
 
 
     }

@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 public class LaskuPopup extends SuperPopup{
     private Lasku laskuOriginal;
 
+    private boolean confirmDelete = false;
+
     public void createPopup(Lasku laskuInput){
         laskuOriginal = laskuInput;
 
@@ -49,6 +51,23 @@ public class LaskuPopup extends SuperPopup{
             }
         });
 
+        Button deleteButton = new Button("Poista");
+        deleteButton.setOnAction(e -> {
+            if (!confirmDelete){
+                confirmDelete = true;
+                deleteButton.setText("Oikeasti poista?");
+            }
+            else {
+            try {
+                DBManager.deleteLasku(laskuOriginal.laskuID);
+                this.closePopup();
+            }
+            catch (Exception exception) {
+                System.out.println("Error deleting: " + exception.getMessage());
+            }
+            }
+        });
+
 
 
 
@@ -62,12 +81,13 @@ public class LaskuPopup extends SuperPopup{
 
                 Lasku lasku = new Lasku(laskuOriginal.laskuID, summa, erapaiva, varausid, maksettu);
                 DBManager.updateLasku(lasku);
-            } catch (Exception _) {
+            } catch (Exception exception) {
+                System.out.println("Error saving: " + exception.getMessage());
             }
             this.closePopup();
         });
 
-        bottomRow.getChildren().addAll(cancelButton, saveButton);
+        bottomRow.getChildren().addAll(deleteButton, cancelButton, saveButton);
 
 
     }
