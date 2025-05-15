@@ -55,7 +55,7 @@ public class LaskuPopup extends SuperPopup{
         deleteButton.setOnAction(e -> {
             if (!confirmDelete){
                 confirmDelete = true;
-                deleteButton.setText("Oikeasti poista?");
+                deleteButton.setText("Vahvista");
             }
             else {
             try {
