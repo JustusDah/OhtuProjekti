@@ -61,7 +61,7 @@ public class RaporttiScreen extends SuperScreen {
 
         button.setOnAction(e -> {
             MokkiRaporttiPopup popup = new MokkiRaporttiPopup();
-            popup.createPopupSuper("Raportti mökistä: " + mokki.nimi);
+            popup.createPopup(mokki);
             popup.showPopup();
         });
 

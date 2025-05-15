@@ -24,16 +24,17 @@ public class MokkiRaporttiPopup extends SuperPopup {
 
         super.createPopupSuper("Raportti mökistä: " + mokki.nimi);
 
-        ArrayList<Varaus> varausList = new ArrayList<>(DBManager.varaukset.stream().toList());
+        ArrayList<Varaus> varausList = new ArrayList<>(DBManager.varaukset);
+
+
+        varausList.sort(new VarausAlkupaivaComparator());
+        String firstVarauspaiva = varausList.getFirst().alkupaiva;
+        String lastVarauspaiva = varausList.getLast().loppupaiva;
 
         YearMonth currentYearMonth;
         YearMonth lastYearMonth;
-        varausList.sort(new VarausAlkupaivaComparator());
-        String firstVarauspaiva = varausList.getFirst().alkupaiva;
-        System.out.println(firstVarauspaiva);
-        String lastVarauspaiva = varausList.getLast().loppupaiva;
-        currentYearMonth = YearMonth.parse(firstVarauspaiva.substring(0,firstVarauspaiva.length()-3));
 
+        currentYearMonth = YearMonth.parse(firstVarauspaiva.substring(0,firstVarauspaiva.length()-3));
         lastYearMonth = YearMonth.parse(lastVarauspaiva.substring(0,lastVarauspaiva.length()-3));
 
         VBox vBox = new VBox();
@@ -43,16 +44,15 @@ public class MokkiRaporttiPopup extends SuperPopup {
 
         while (currentYearMonth.isBefore(lastYearMonth.plusMonths(1))) {
             int occupiedDays = 0;
-            double tulot = 0;
             for (Varaus varaus : varausList) {
                 if (varaus.mokkiID == mokki.mokkiID){
                     occupiedDays = occupiedDays + Utils.calculateNumberOfDays(currentYearMonth, varaus.alkupaiva, varaus.loppupaiva);
-                    tulot = tulot + mokki.hintaPerYo;
                 }
             };
-            double occupancy = (double) occupiedDays / currentYearMonth.getLong(ChronoField.DAY_OF_MONTH);
+            double tulot = occupiedDays * mokki.hintaPerYo;
+            double occupancy = (double) occupiedDays / currentYearMonth.lengthOfMonth();
 
-            vBox.getChildren().add(createReportRow(currentYearMonth, tulot, occupancy));
+            vBox.getChildren().add(createReportRow(currentYearMonth, tulot, occupancy, occupiedDays));
             currentYearMonth = currentYearMonth.plusMonths(1);
         }
         centerPane.getChildren().add(vBox);
@@ -66,11 +66,13 @@ public class MokkiRaporttiPopup extends SuperPopup {
 
     }
 
-    private Text createReportRow(YearMonth yearMonth, double tulot, double occupancy){
+    private Text createReportRow(YearMonth yearMonth, double tulot, double occupancy, int occupiedDays){
+        String occupancyString = String.format("%.2f", occupancy*100.0);
         Text reportRow = new Text(yearMonth.toString()
                 + ": "
-                + " occupancy: " + occupancy
-                + ", tulot: " + tulot + " €"
+                + " varattuna: " + occupiedDays + " päivää,"
+                + " varausprosentti: " + occupancyString + " %"
+                + ", varausten tulot: " + tulot + " €"
         );
         return reportRow;
     }

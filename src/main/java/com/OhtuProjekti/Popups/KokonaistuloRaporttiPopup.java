@@ -60,7 +60,6 @@ public class KokonaistuloRaporttiPopup extends SuperPopup {
                 + ": "
                 + tulot + " €"
         );
-        System.out.println(yearMonth);
         return reportRow;
     }
 
