@@ -46,7 +46,7 @@ public class InsertVarausPopup extends SuperPopup{
                 Varaus varaus = new Varaus( asiakasId, mokkiId, alkupaiva, loppupaiva);
 
                 DBManager.insertVaraus(varaus);
-                Lasku lasku = new Lasku()
+                Lasku lasku = new Lasku();
             } catch (Exception _) {
             }
             this.closePopup();

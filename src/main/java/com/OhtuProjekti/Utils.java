@@ -22,16 +22,16 @@ public class Utils {
     /**
      * Window width
      */
-    public static final double SCREEN_WIDTH = 1200;
+    public static final double SCREEN_WIDTH = 1100;
     /**
      * Window height
      */
-    public static final double SCREEN_HEIGHT = 800;
+    public static final double SCREEN_HEIGHT = 700;
 
     public static final double POPUP_WIDTH = 600;
     public static final double POPUP_HEIGHT = 500;
 
-    public static final Color TITLE_TEXT_COLOR = Color.DEEPPINK;
+    public static final Color TITLE_TEXT_COLOR = Color.BLACK;
 
     public static double calculateNightsAndPrice(int varausId){
         Varaus varaus = DBManager.varaukset.filtered(varauss -> varauss.varausID == varausId).getFirst();
