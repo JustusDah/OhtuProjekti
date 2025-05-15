@@ -2,6 +2,9 @@ package com.OhtuProjekti;
 
 import javafx.scene.paint.Color;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Various constants and functions used globally
  */
@@ -27,5 +30,21 @@ public class Utils {
     public static final double POPUP_HEIGHT = 500;
 
     public static final Color TITLE_TEXT_COLOR = Color.DEEPPINK;
+
+    public static double CalculateNightsAndPrice(){
+        String alotusPaivaStr = DBManager.varaukset.filtered()
+        String lopetusPaivaStr = DBManager.varaukset.getFirst().loppupaiva;
+        double hintaPerYo = DBManager.mokkis.getFirst().hintaPerYo;
+
+        LocalDate alkuPaiva = LocalDate.parse(alotusPaivaStr);
+        LocalDate loppuPaiva = LocalDate.parse(lopetusPaivaStr);
+
+        long yot = ChronoUnit.DAYS.between(alkuPaiva, loppuPaiva);
+        double tuotto = yot * hintaPerYo;
+
+        System.out.println(tuotto);
+
+        return tuotto;
+    }
 
 }
