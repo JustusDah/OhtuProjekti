@@ -8,8 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class MokkiPopup extends SuperPopup{
-    private Mokki mokkiOriginal;
 
+    private Mokki mokkiOriginal;
 
     private boolean confirmDelete = false;
 

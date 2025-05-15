@@ -3,6 +3,9 @@ package com.OhtuProjekti.Classes;
 public class Lasku {
     public int laskuID = 0;
     public double summa;
+    /**
+     * Must be format yyyy-MM-dd
+     * */
     public String erapaiva;
     public int varausID;
     public int maksettu;
@@ -21,5 +24,7 @@ public class Lasku {
         this.varausID = varausID;
         this.maksettu = maksettu;
     }
+
+
 
 }

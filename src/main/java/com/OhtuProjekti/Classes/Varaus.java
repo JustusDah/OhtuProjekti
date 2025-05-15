@@ -15,7 +15,13 @@ public class Varaus {
         this.varausID = varausID;
         this.asiakasID = asiakasID;
         this.mokkiID = mokkiID;
+        /**
+         * Must be format yyyy-MM-dd
+         * */
         this.alkupaiva = alkupaiva;
+        /**
+         * Must be format yyyy-MM-dd
+         * */
         this.loppupaiva = loppupaiva;
     }
 

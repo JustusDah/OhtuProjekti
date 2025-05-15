@@ -78,5 +78,11 @@ public class SceneManager {
         setScene(laskuScreen.getScreen());
     }
 
+    public void showRaporttiScreen(){
+        RaporttiScreen raporttiScreen = new RaporttiScreen(this);
+        raporttiScreen.createScreen();
+        setScene(raporttiScreen.getScreen());
+    }
+
 
 }
