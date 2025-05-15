@@ -4,6 +4,7 @@ import com.OhtuProjekti.Classes.Varaus;
 import javafx.scene.paint.Color;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -37,8 +38,6 @@ public class Utils {
         String alotusPaivaStr = varaus.alkupaiva;
         String lopetusPaivaStr = varaus.loppupaiva;
 
-
-
         LocalDate alkuPaiva = LocalDate.parse(alotusPaivaStr);
         LocalDate loppuPaiva = LocalDate.parse(lopetusPaivaStr);
 
@@ -50,6 +49,12 @@ public class Utils {
         System.out.println(tuotto);
 
         return tuotto;
+    }
+
+    public static YearMonth calculateYearMonthFromString(String input){
+        LocalDate localDate = LocalDate.parse(input);
+        YearMonth yearMonth = YearMonth.of(localDate.getYear(), localDate.getMonthValue());
+        return yearMonth;
     }
 
 }
