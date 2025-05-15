@@ -33,7 +33,7 @@ public class Utils {
 
     public static final Color TITLE_TEXT_COLOR = Color.DEEPPINK;
 
-    public static double CalculateNightsAndPrice(int varausId){
+    public static double calculateNightsAndPrice(int varausId){
         Varaus varaus = DBManager.varaukset.filtered(varauss -> varauss.varausID == varausId).getFirst();
         String alotusPaivaStr = varaus.alkupaiva;
         String lopetusPaivaStr = varaus.loppupaiva;
@@ -44,6 +44,21 @@ public class Utils {
         double hintaPerYo = DBManager.mokkis.filtered(mokki -> mokki.mokkiID == varaus.mokkiID).getFirst().hintaPerYo;
 
         long yot = ChronoUnit.DAYS.between(alkuPaiva, loppuPaiva);
+        double tuotto = yot * hintaPerYo;
+
+        System.out.println(tuotto);
+
+        return tuotto;
+    }
+
+    public static double calculateJotain(String alkuPaiva, String loppuPaiva, int mokkiId){
+        Varaus varaus = DBManager.varaukset.filtered(varauss -> varauss.varausID == varausId).getFirst();
+        LocalDate alkPaiva = LocalDate.parse(varaus.alkupaiva);
+        LocalDate loppPaiva = LocalDate.parse(varaus.loppupaiva);
+
+        double hintaPerYo = DBManager.mokkis.filtered(mokki -> mokki.mokkiID == varaus.mokkiID).getFirst().hintaPerYo;
+
+        long yot = ChronoUnit.DAYS.between(alkPaiva, loppPaiva);
         double tuotto = yot * hintaPerYo;
 
         System.out.println(tuotto);

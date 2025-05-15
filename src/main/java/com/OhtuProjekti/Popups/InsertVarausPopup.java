@@ -1,8 +1,10 @@
 package com.OhtuProjekti.Popups;
 
+import com.OhtuProjekti.Classes.Lasku;
 import com.OhtuProjekti.Classes.Mokki;
 import com.OhtuProjekti.Classes.Varaus;
 import com.OhtuProjekti.DBManager;
+import com.OhtuProjekti.Utils;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,7 +17,6 @@ public class InsertVarausPopup extends SuperPopup{
         super.createPopupSuper("Lisää varaus");
 
         GridPane grid = new GridPane();
-        //TextField idField = new TextField();
         TextField asiakasIdField = new TextField();
         TextField mokkiIdField = new TextField();
         TextField alkupaivaField = new TextField();
@@ -44,6 +45,7 @@ public class InsertVarausPopup extends SuperPopup{
 
                 Varaus varaus = new Varaus( asiakasId, mokkiId, alkupaiva, loppupaiva);
                 DBManager.insertVaraus(varaus);
+                Lasku lasku = new Lasku()
             } catch (Exception _) {
             }
             this.closePopup();
