@@ -3,10 +3,13 @@ package com.OhtuProjekti;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-//sdfasd
-
 /**
  * Startpoint of the application.
+ *
+ * Instructions to start clean:
+ * 1) delete mokki_db.sqlite from project root
+ * 2) run SQL.main() to generate an empty database
+ * 3) (optional) run GenerateExampleData.main() to populate the database with example data
  */
 public class MainApp extends Application {
 
