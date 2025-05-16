@@ -9,6 +9,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+
+/**
+ * Run SQL.main() to generate a database file. Also generates example data.
+ * You must first manually delete the file mokki_db.sqlite in the project root,
+ * otherwise this just adds the example data on top of the existing database.
+ *
+ * */
 public class SQL {
     public static void main(String[] args) {
         String url = "jdbc:sqlite:mokki_db.sqlite";
@@ -64,16 +71,18 @@ public class SQL {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // Comment out the next line if you want to start with an empty database
         generateExampleData();
     }
 
+    /**
+     * Used to populate the database with example data.
+     */
     public static void generateExampleData(){
         DBManager.insertAsiakas(new Asiakas("Keijo Keijonen", "Keijontie 5", "0401234567", "keijo@gmail.com"));
         DBManager.insertAsiakas(new Asiakas("Maija Malli", "Mallikatu 3", "0507654321", "maija@example.com"));
         DBManager.insertAsiakas(new Asiakas("Teppo Testaaja", "Testikatu 9", "0441122334", "teppo@testi.fi"));
         DBManager.insertAsiakas(new Asiakas("Asko Asiakas", "Asiakkaantie 1", "0400123123", "asko@asiakas.fi"));
-
-
 
         DBManager.insertMokki(new Mokki("Metsämökki", "Metsäpolku 1", "Sähkö, Vesi, Sauna", 120.0, 4));
         DBManager.insertMokki(new Mokki( "Järvimökki", "Järventie 2", "Sähkö, Vesi, Vene", 150.0, 6));
