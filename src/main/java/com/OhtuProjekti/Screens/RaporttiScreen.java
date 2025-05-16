@@ -31,7 +31,7 @@ public class RaporttiScreen extends SuperScreen {
         mainBox.setSpacing(10);
 
 
-        Button kokonaistuloButton = new Button("Kokonaistulot");
+        Button kokonaistuloButton = new Button("Toteutuneet kokonaistulot");
         kokonaistuloButton.setOnAction(e -> {
             KokonaistuloRaporttiPopup popup = new KokonaistuloRaporttiPopup();
             popup.createPopup();

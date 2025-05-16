@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import org.sqlite.core.DB;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -240,6 +241,44 @@ public class DBManager {
                 v.alkupaiva,
                 newVarausIdList.getFirst(),
                 0
+        );
+        DBManager.insertLasku(lasku);
+
+    }
+
+    /**
+     * For generating test cases
+     * @param v
+     */
+    public static void insertVarausWithLaskuTest(Varaus v){
+
+        ArrayList<Integer> originalVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
+            varauss -> varauss.varausID
+        ).toList());
+
+        DBManager.insertVaraus(v);
+
+        ArrayList<Integer> newVarausIdList = new ArrayList<Integer>(DBManager.varaukset.stream().map(
+            varauss -> varauss.varausID
+        ).toList());
+
+
+        newVarausIdList.removeAll(originalVarausIdList);
+
+        int maksettu = 0;
+
+        LocalDate alkupaivaLocalDate = LocalDate.parse(v.alkupaiva);
+        LocalDate paivaNyt = LocalDate.now();
+        if (alkupaivaLocalDate.isBefore(paivaNyt)){
+            maksettu = 1;
+        }
+
+
+        Lasku lasku = new Lasku(
+            Utils.calculatePriceFromDates(v.alkupaiva, v.loppupaiva, v.mokkiID),
+            v.alkupaiva,
+            newVarausIdList.getFirst(),
+            maksettu
         );
         DBManager.insertLasku(lasku);
 
